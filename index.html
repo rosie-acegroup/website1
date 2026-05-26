@@ -111,11 +111,11 @@ nav.scrolled{padding:1rem 3.5rem;}
 hr{border:none;border-top:1px solid rgba(102,47,71,0.12);margin:0 3.5rem;}
 
 /* INTRO */
-.intro{padding:6rem 3.5rem;display:grid;grid-template-columns:1.1fr 0.9fr;gap:6rem;align-items:start;max-width:1280px;margin:0 auto;}
+.intro{padding:6rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1400px;margin:0 auto;}
 .intro-eyebrow{font-family:var(--p);font-weight:500;font-size:16px;line-height:1.8;color:var(--plum);margin-bottom:1.5rem;}
 .intro-rose{width:100%;max-width:180px;color:var(--plum);opacity:0.18;display:block;margin-top:2rem;}
 .intro-rose svg{width:100%;height:auto;}
-.intro-heading{font-family:var(--f);font-weight:700;font-style:italic;font-size:clamp(36px,4.5vw,56px);line-height:1.05;color:var(--black);margin-bottom:0;}
+.intro-heading{font-family:var(--f);font-weight:700;font-style:italic;font-size:clamp(28px,3.2vw,44px);line-height:1.1;color:var(--black);margin-bottom:0;}
 .intro-heading em{color:var(--plum);}
 .intro-body{font-family:var(--p);font-weight:300;font-size:18px;line-height:1.85;color:rgba(22,21,17,0.75);margin-bottom:2rem;text-align:left;}
 .btn-work{display:inline-block;padding:0.9rem 2.2rem;border:1.5px solid var(--black);color:var(--black);font-family:var(--p);font-weight:600;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;border-radius:6px;}
@@ -399,7 +399,7 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
   <defs>
     <style>
       .cls-1 {
-        fill: currentColor;
+        fill: #161511;
       }
     </style>
   </defs>
@@ -781,53 +781,53 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 
 
-// Hero image pan on scroll
+
+
+
+
+
+// ── IMAGE SCROLL ANIMATIONS ──────────────────────────────────────────
 (function() {
-  const bg = document.getElementById('heroBg');
-  if (!bg) return;
-  let ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        const pct = Math.min(window.scrollY / (window.innerHeight), 1);
-        // Pan from center top to center bottom as user scrolls
-        const yPos = 50 + pct * 30;
-        bg.style.backgroundPosition = 'center ' + yPos + '%';
-        ticking = false;
-      });
-      ticking = true;
+
+  // 1. Hero image — pan vertically on scroll
+  var heroBg = document.getElementById('heroBg');
+  if (heroBg) {
+    function updateHeroPan() {
+      var pct = Math.min(window.scrollY / window.innerHeight, 1);
+      var y = 50 + (pct * 25);
+      heroBg.style.backgroundPosition = 'center ' + y + '%';
     }
-  });
-})();
-
-// Intro photo zoom on scroll
-(function() {
-  const photo = document.querySelector('.intro-photo');
-  if (!photo) return;
-  const wrapper = photo.parentElement;
-  wrapper.style.overflow = 'hidden';
-  wrapper.style.borderRadius = '10px';
-  photo.style.transition = 'transform 0.3s ease-out';
-  photo.style.borderRadius = '0';
-
-  let ticking = false;
-  function update() {
-    const rect = wrapper.getBoundingClientRect();
-    const viewH = window.innerHeight;
-    // How far through the viewport is the image
-    const progress = 1 - (rect.top + rect.height) / (viewH + rect.height);
-    const clamped = Math.max(0, Math.min(1, progress));
-    const scale = 1 + clamped * 0.12;
-    photo.style.transform = 'scale(' + scale + ')';
+    window.addEventListener('scroll', updateHeroPan, { passive: true });
+    updateHeroPan();
   }
 
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() { update(); ticking = false; });
-      ticking = true;
+  // 2. Intro photo — zoom in as it enters viewport
+  var photo = document.querySelector('.intro-photo');
+  if (photo) {
+    // Wrap in overflow hidden container
+    var wrapper = photo.parentElement;
+    wrapper.style.overflow = 'hidden';
+    wrapper.style.borderRadius = '10px';
+    photo.style.borderRadius = '0';
+    photo.style.display = 'block';
+    photo.style.width = '100%';
+    photo.style.willChange = 'transform';
+
+    function updateZoom() {
+      var rect = wrapper.getBoundingClientRect();
+      var vh = window.innerHeight;
+      // Progress: 0 when bottom enters screen, 1 when top leaves screen
+      var progress = 1 - (rect.top + rect.height) / (vh + rect.height);
+      var clamped = Math.max(0, Math.min(1, progress));
+      // Scale 1.0 (far) to 1.1 (close)
+      var scale = 1 + (clamped * 0.1);
+      photo.style.transform = 'scale(' + scale + ')';
     }
-  });
-  update();
+
+    window.addEventListener('scroll', updateZoom, { passive: true });
+    updateZoom();
+  }
+
 })();
 
 </body>
