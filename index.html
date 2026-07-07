@@ -432,6 +432,37 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
   </div>
 </section>
 
+<!-- SNEAK PEEK -->
+<style>
+.peek{background:var(--paper);padding:6rem 3rem 5rem;text-align:center;overflow:hidden;}
+.peek-lbl{font-family:var(--p);font-weight:500;font-size:12px;letter-spacing:0.45em;text-transform:uppercase;color:var(--plum);display:block;margin-bottom:1.1rem;}
+.peek-h{font-family:var(--f);font-weight:700;font-style:italic;font-size:clamp(28px,4vw,44px);line-height:1.05;color:var(--black);margin:0 0 3.2rem;}
+.peek-h em{color:var(--plum);}
+.peek-row{display:flex;gap:1.6rem;justify-content:center;align-items:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:1.2rem 0.5rem 1.8rem;scrollbar-width:none;}
+.peek-row::-webkit-scrollbar{display:none;}
+.peek-item{flex:0 0 auto;width:150px;height:212px;border-radius:110px;overflow:hidden;display:block;position:relative;box-shadow:0 16px 34px rgba(102,47,71,0.14);transition:transform 0.45s cubic-bezier(.19,1,.22,1),box-shadow 0.45s;}
+.peek-item:nth-child(even){margin-top:46px;}
+.peek-item:nth-child(3){width:176px;height:250px;margin-top:0;}
+.peek-item:hover{transform:translateY(-8px);box-shadow:0 26px 46px rgba(102,47,71,0.22);}
+.peek-ph{position:absolute;inset:0;transition:transform 0.7s cubic-bezier(.19,1,.22,1);}
+.peek-item:hover .peek-ph{transform:scale(1.09);}
+.peek-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(22,21,17,0.22),transparent 55%);pointer-events:none;}
+.peek-btn{display:inline-block;margin-top:2.6rem;padding:1rem 2.6rem;border:1.5px solid var(--black);color:var(--black);font-family:var(--p);font-weight:600;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;border-radius:8px;transition:all 0.3s;}
+.peek-btn:hover{background:var(--black);color:var(--cream);}
+@media(max-width:720px){.peek{padding:4.5rem 1.2rem 4rem;}.peek-row{justify-content:flex-start;}.peek-item:nth-child(3){width:150px;height:212px;}.peek-item:nth-child(even){margin-top:0;}}
+</style>
+<section class="peek">
+  <span class="peek-lbl">Our Work</span>
+  <h2 class="peek-h">A peek at what<br>we've <em>created.</em></h2>
+  <div class="peek-row">
+    <a class="peek-item" href="work.html" aria-label="View our work"><span class="peek-ph" style="background:linear-gradient(140deg,#662f47,#b24b7c);"></span></a>
+    <a class="peek-item" href="work.html" aria-label="View our work"><span class="peek-ph" style="background:linear-gradient(140deg,#dba0b2,#f5f0ea);"></span></a>
+    <a class="peek-item" href="work.html" aria-label="View our work"><span class="peek-ph" style="background:linear-gradient(140deg,#161511,#662f47);"></span></a>
+    <a class="peek-item" href="work.html" aria-label="View our work"><span class="peek-ph" style="background:linear-gradient(140deg,#b24b7c,#dba0b2);"></span></a>
+    <a class="peek-item" href="work.html" aria-label="View our work"><span class="peek-ph" style="background:linear-gradient(140deg,#662f47,#dba0b2);"></span></a>
+  </div>
+  <a class="peek-btn" href="work.html">See all our work</a>
+</section>
 
 <!-- BRANDS -->
 <section id="work" class="brands-section">
