@@ -137,6 +137,8 @@
 
     <button class="go" id="go">Generate</button>
     <button class="go alt" id="cal" style="display:none;">Add week to Google Calendar</button>
+    <button class="go alt" id="connectCal" style="display:none;">Connect Google Calendar</button>
+    <div id="calStatus" style="font-size:11.5px;color:#8a6a80;margin-top:8px;text-align:center;line-height:1.5;"></div>
   </div>
 
   <div>
@@ -164,6 +166,21 @@ const state = {
 };
 let week = null;
 let trends = null;
+
+// ── Backend ────────────────────────────────────────────────────────────────
+// Set this to your deployed Cloudflare Worker URL (see worker/README.md).
+const WORKER_URL = "https://ace-content-studio.YOUR-SUBDOMAIN.workers.dev";
+
+// Shared access code, remembered in the browser after the first prompt.
+function accessCodeSilent(){ return localStorage.getItem("ace_access_code") || ""; }
+function accessCode(){
+  let c = accessCodeSilent();
+  if(!c){
+    c = (prompt("Enter the ACE Studio access code:") || "").trim();
+    if(c) localStorage.setItem("ace_access_code", c);
+  }
+  return c;
+}
 
 function wire(groupId, key){
   const g = document.getElementById(groupId);
@@ -230,18 +247,17 @@ document.getElementById("refreshTrends").addEventListener("click", async ()=>{
 
 async function callClaude(userMsg, opts={}){
   const body = {
-    model:"claude-sonnet-4-6",
-    max_tokens:1000,
     system: opts.system || SYSTEM,
     messages:[{role:"user",content:userMsg}]
   };
-  if(opts.mcp) body.mcp_servers = opts.mcp;
   if(opts.tools) body.tools = opts.tools;
-  const res = await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)
+  const res = await fetch(WORKER_URL + "/api/generate",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","X-Access-Code":accessCode()},
+    body:JSON.stringify(body)
   });
   const data = await res.json();
-  if(data && data.error) throw new Error(data.error.message || "API error");
+  if(data && data.error) throw new Error((data.error && data.error.message) || data.error || "API error");
   return data;
 }
 
@@ -287,7 +303,7 @@ async function ensureTrends(){
     const data = await callClaude(
       `Today is ${today}. Search the web for Instagram trending reels, trending audio, and trending formats from the LAST 3 DAYS only. Then reply with ONLY JSON, no fences: {"trends":[{"name":"short trend name","how":"one line on the format and how a brand uses it"}]} with at most 3 trends. Only include trends you can verify are from the last 3 days. If nothing verifiably recent is found, return {"trends":[]}.`,
       { system:"You are a trend researcher with web search access. Search first, then your final reply must be only the JSON object, nothing else.",
-        tools:[{type:"web_search_20250305", name:"web_search"}] }
+        tools:[{type:"web_search_20260209", name:"web_search"}] }
     );
     const parsed = extractJSON(data);
     trends = (parsed.trends||[]).slice(0,3);
@@ -362,8 +378,62 @@ function nextDate(dayName){
   return {y:d.getFullYear(), m:String(d.getMonth()+1).padStart(2,"0"), dd:String(d.getDate()).padStart(2,"0")};
 }
 
+async function calendarConnected(){
+  try{
+    const res = await fetch(WORKER_URL + "/api/calendar/status",{
+      headers:{"X-Access-Code":accessCodeSilent()}
+    });
+    const d = await res.json();
+    return !!d.connected;
+  }catch(e){ return false; }
+}
+
+const connectBtn = document.getElementById("connectCal");
+const calStatus = document.getElementById("calStatus");
+
+async function refreshCalendarUI(){
+  if(!accessCodeSilent()){
+    connectBtn.style.display = "block";
+    calStatus.textContent = "Connect Google Calendar to enable one-tap scheduling.";
+    return;
+  }
+  const connected = await calendarConnected();
+  connectBtn.style.display = connected ? "none" : "block";
+  calStatus.textContent = connected
+    ? "✓ Google Calendar connected."
+    : "Connect Google Calendar to enable one-tap scheduling.";
+}
+
+connectBtn.addEventListener("click", ()=>{
+  const code = accessCode();
+  if(!code) return;
+  window.open(
+    WORKER_URL + "/auth/google/start?ac=" + encodeURIComponent(code),
+    "gcal", "width=520,height=660"
+  );
+});
+
+window.addEventListener("message", async e=>{
+  if(e.data === "ace-calendar-connected"){
+    calStatus.textContent = "✓ Google Calendar connected.";
+    await refreshCalendarUI();
+  }else if(e.data === "ace-calendar-failed"){
+    calStatus.textContent = "Connection failed. Please try again.";
+  }
+});
+
+refreshCalendarUI();
+
 async function pushWeekToCalendar(){
   if(!week) return;
+  if(!(await calendarConnected())){
+    const note = document.createElement("div");
+    note.className = "err";
+    note.textContent = "Google Calendar is not connected yet. Tap Connect Google Calendar first.";
+    out.prepend(note);
+    await refreshCalendarUI();
+    return;
+  }
   calBtn.disabled = true;
   const status = document.createElement("div");
   out.prepend(status);
@@ -377,13 +447,19 @@ async function pushWeekToCalendar(){
     status.className="spin"; status.textContent = `Adding ${slot.label} to calendar`;
     const desc = `HOOK: ${p.hook}\n\nON SCREEN:\n${p.on_screen_text}\n\nCAPTION:\n${p.caption}`;
     try{
-      const data = await callClaude(
-        `Create a Google Calendar event.\nTitle: 📸 ACE — ${slot.label}\nStart: ${y}-${m}-${dd}T${time.s}:00 America/New_York\nEnd: ${y}-${m}-${dd}T${time.e}:00 America/New_York\nDescription:\n${desc}`,
-        { system:"You are a scheduling assistant. Use the Google Calendar tool to create exactly the event described. After creating it, reply with only the word DONE.",
-          mcp:[{type:"url",url:"https://calendarmcp.googleapis.com/mcp/v1",name:"google-calendar"}] }
-      );
-      const results = (data.content||[]).filter(b=>b.type==="mcp_tool_result");
-      if(results.length>0 || textOf(data).includes("DONE")) done++;
+      const res = await fetch(WORKER_URL + "/api/calendar/event",{
+        method:"POST",
+        headers:{"Content-Type":"application/json","X-Access-Code":accessCode()},
+        body:JSON.stringify({
+          title:`📸 ACE — ${slot.label}`,
+          description:desc,
+          start:`${y}-${m}-${dd}T${time.s}:00`,
+          end:`${y}-${m}-${dd}T${time.e}:00`,
+          timeZone:"America/New_York"
+        })
+      });
+      const d = await res.json();
+      if(res.ok && d.ok) done++;
     }catch(e){}
   }
   status.className = done===tried ? "ok" : "err";

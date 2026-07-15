@@ -1,0 +1,15 @@
+name = "ace-content-studio"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Replace the id below with the KV namespace you create in step 3 of README.md
+# (`wrangler kv namespace create ACE_KV`).
+kv_namespaces = [
+  { binding = "ACE_KV", id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID" }
+]
+
+# Secrets are NOT stored here. Set them with:
+#   wrangler secret put ANTHROPIC_API_KEY
+#   wrangler secret put GOOGLE_CLIENT_ID
+#   wrangler secret put GOOGLE_CLIENT_SECRET
+#   wrangler secret put ACCESS_CODE

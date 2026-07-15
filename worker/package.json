@@ -1,0 +1,13 @@
+{
+  "name": "ace-content-studio-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend Worker for ACE Content Studio: Anthropic proxy + Google Calendar OAuth.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}
