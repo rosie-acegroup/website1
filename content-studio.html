@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACE Content Studio</title>
+<style>
+  :root{
+    --plum:#5C2D4F; --plum-accent:#873A70;
+    --pink-light:#F7ECF2; --pink-mid:#EDD7E7;
+    --ink:#241326; --paper:#FBF8FA; --line:#E4D3DE;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;}
+  header{background:var(--plum);color:#fff;padding:26px 36px;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  header h1{font-size:20px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;}
+  header .sub{font-size:12px;letter-spacing:.08em;color:var(--pink-mid);}
+  .wrap{max-width:1140px;margin:0 auto;padding:32px 24px 80px;display:grid;grid-template-columns:380px 1fr;gap:32px;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+  .label{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--plum-accent);margin:0 0 10px;}
+  .label .note{font-weight:600;letter-spacing:.04em;text-transform:none;color:#a78599;}
+  .panel{margin-bottom:24px;}
+  .panel.dim{opacity:.45;pointer-events:none;}
+  .jobs{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .job{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:13px 13px 11px;cursor:pointer;text-align:left;transition:border-color .15s, background .15s;}
+  .job:hover{border-color:var(--plum-accent);}
+  .job.on{background:var(--plum);border-color:var(--plum);color:#fff;}
+  .job b{display:block;font-size:13.5px;font-weight:800;letter-spacing:.04em;}
+  .job span{display:block;font-size:11.5px;margin-top:4px;line-height:1.4;color:#8a6a80;}
+  .job.on span{color:var(--pink-mid);}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-size:13px;cursor:pointer;transition:all .15s;}
+  .pill:hover{border-color:var(--plum-accent);}
+  .pill.on{background:var(--plum-accent);border-color:var(--plum-accent);color:#fff;font-weight:700;}
+  textarea{width:100%;min-height:96px;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:14px;line-height:1.5;resize:vertical;background:#fff;color:var(--ink);}
+  textarea:focus{outline:2px solid var(--plum-accent);border-color:transparent;}
+  .go{width:100%;background:var(--plum);color:#fff;border:none;border-radius:10px;padding:16px;font-size:14px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .15s;}
+  .go:hover{background:var(--plum-accent);}
+  .go:disabled{opacity:.55;cursor:wait;}
+  .go.alt{background:var(--pink-light);color:var(--plum);margin-top:10px;}
+  .go.alt:hover{background:var(--pink-mid);}
+
+  /* Trends bar */
+  .trends{
+    background:#fff;border:1.5px solid var(--line);border-radius:12px;
+    padding:12px 16px;margin-bottom:18px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    font-size:12.5px;line-height:1.5;
+  }
+  .trends .dot{width:8px;height:8px;border-radius:50%;background:#c9b3c1;flex:none;}
+  .trends.live .dot{background:#3f9a52;}
+  .trends b{color:var(--plum);}
+  .trends .t{background:var(--pink-light);border-radius:6px;padding:3px 9px;color:var(--plum);font-weight:700;}
+  .trends button{margin-left:auto;background:none;border:1.5px solid var(--line);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--plum-accent);cursor:pointer;}
+  .trends button:hover{border-color:var(--plum-accent);}
+
+  .out{min-height:300px;}
+  .empty{border:1.5px dashed var(--line);border-radius:14px;padding:56px 32px;text-align:center;color:#9a7d90;font-size:14px;line-height:1.8;}
+
+  /* One card per post */
+  .post{background:#fff;border:1.5px solid var(--line);border-radius:16px;margin-bottom:22px;overflow:hidden;}
+  .post-head{
+    background:var(--pink-light);
+    padding:14px 20px;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  }
+  .daytag{background:var(--plum);color:#fff;border-radius:6px;padding:5px 11px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+  .lifetag{background:#fff;color:var(--plum);border:1.5px solid var(--pink-mid);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+  .depthtag{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:6px;padding:5px 11px;}
+  .depthtag.raw{background:var(--plum);color:#fff;}
+  .depthtag.real{background:var(--pink-mid);color:var(--plum);}
+  .sec{padding:18px 20px;position:relative;}
+  .sec + .sec{border-top:1px solid var(--pink-light);}
+  .sec .label{margin-bottom:8px;}
+  .sec .body{font-size:14.5px;line-height:1.7;white-space:pre-wrap;}
+  .hookline{font-size:18px;font-weight:800;line-height:1.45;color:var(--plum);padding-right:70px;}
+  .copy{position:absolute;top:14px;right:16px;background:var(--pink-light);border:none;border-radius:8px;padding:6px 13px;font-size:12px;font-weight:700;color:var(--plum);cursor:pointer;}
+  .copy:hover{background:var(--pink-mid);}
+  .spin{text-align:center;padding:50px 20px;color:var(--plum-accent);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;}
+  .spin::after{content:"";display:block;width:26px;height:26px;margin:16px auto 0;border:3px solid var(--pink-mid);border-top-color:var(--plum-accent);border-radius:50%;animation:r .8s linear infinite;}
+  @keyframes r{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion: reduce){ .spin::after{animation:none;} }
+  .err{background:#fdf1f1;border:1.5px solid #e5bcbc;border-radius:10px;padding:16px;color:#8c3b3b;font-size:14px;line-height:1.6;margin-bottom:14px;}
+  .ok{background:#eef7ef;border:1.5px solid #bcd9bf;border-radius:10px;padding:16px;color:#2f6b3a;font-size:14px;line-height:1.6;margin-bottom:14px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>ACE Content Studio</h1>
+  <div class="sub">The Ace Group NY · live 3-day trend search · LIFE storytelling wheel · calendar built in</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="panel">
+      <div class="label">What are we making?</div>
+      <div class="pills" id="modes">
+        <button class="pill on" data-v="single">Single post</button>
+        <button class="pill" data-v="week">Full week</button>
+      </div>
+    </div>
+
+    <div class="panel" id="jobPanel">
+      <div class="label">Job <span class="note">· single post</span></div>
+      <div class="jobs" id="jobs">
+        <button class="job on" data-v="RECOGNITION"><b>Recognition</b><span>"that's literally me" — name her exact pain</span></button>
+        <button class="job" data-v="PROOF"><b>Proof</b><span>client work + the real outcome</span></button>
+        <button class="job" data-v="RAW"><b>Raw</b><span>LIFE wheel story at depth three</span></button>
+        <button class="job" data-v="ACTION"><b>Action</b><span>the offer + keyword next step</span></button>
+      </div>
+    </div>
+
+    <div class="panel" id="lifePanel" style="display:none;">
+      <div class="label">LIFE category <span class="note">· for Raw</span></div>
+      <div class="pills" id="life">
+        <button class="pill on" data-v="auto">Auto</button>
+        <button class="pill" data-v="LOVE">Love</button>
+        <button class="pill" data-v="IDENTITY">Identity</button>
+        <button class="pill" data-v="FITNESS">Fitness</button>
+        <button class="pill" data-v="EARNINGS">Earnings</button>
+      </div>
+    </div>
+
+    <div class="panel" id="formatPanel">
+      <div class="label">Format <span class="note">· single post</span></div>
+      <div class="pills" id="formats">
+        <button class="pill on" data-v="Reel (face to camera)">Reel · face to camera</button>
+        <button class="pill" data-v="Text reel over B-roll">Text reel · B-roll</button>
+        <button class="pill" data-v="Carousel">Carousel</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="label">Context (optional but powerful)</div>
+      <textarea id="ctx" placeholder="Projects, moments, wins, this week's goal. Example: filmed at the Adom event. Pushing ACE+ this week. Client just told us sales jumped after the rebrand."></textarea>
+    </div>
+
+    <button class="go" id="go">Generate</button>
+    <button class="go alt" id="cal" style="display:none;">Add week to Google Calendar</button>
+  </div>
+
+  <div>
+    <div class="trends" id="trendsBar">
+      <span class="dot"></span>
+      <span id="trendsText">Trends load on your first generate, scraped live from the last 3 days.</span>
+      <button id="refreshTrends">Refresh</button>
+    </div>
+    <div class="out" id="out">
+      <div class="empty">
+        Pick what you're making and generate. Every post speaks to one reader: the founder of a feminine, powerful, purpose-driven brand who already senses ACE is the solution.<br><br>
+        <b>Single post</b> uses the job you pick. <b>Full week</b> builds Mon Recognition · Wed Proof · Fri Raw (LIFE wheel) · Sat 3 trial reels, then one tap sends it all to Google Calendar.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const state = {
+  mode:"single",
+  job: "RECOGNITION",
+  life: "auto",
+  format: "Reel (face to camera)",
+  vertical: "Founders of feminine, powerful, meaningful, purpose-driven brands. They already sense ACE is the solution, they have taste and conviction, and their presence has not caught up to their purpose yet."
+};
+let week = null;
+let trends = null;
+
+function wire(groupId, key){
+  const g = document.getElementById(groupId);
+  g.addEventListener("click", e=>{
+    const b = e.target.closest("button"); if(!b) return;
+    g.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    state[key] = b.dataset.v;
+    if(key==="job") document.getElementById("lifePanel").style.display = (state.job==="RAW" && state.mode==="single") ? "block" : "none";
+    if(key==="mode"){
+      const single = state.mode==="single";
+      document.getElementById("jobPanel").classList.toggle("dim", !single);
+      document.getElementById("formatPanel").classList.toggle("dim", !single);
+      document.getElementById("lifePanel").style.display = (single && state.job==="RAW") ? "block" : "none";
+      document.getElementById("go").textContent = single ? "Generate" : "Generate full week";
+      document.getElementById("cal").style.display = "none";
+      week = null;
+    }
+  });
+}
+wire("modes","mode"); wire("jobs","job"); wire("life","life"); wire("formats","format");
+
+const SYSTEM = `You are the content engine for ACE Group NY, a Brooklyn creative agency run by Rosie. You write Instagram content in her exact voice. Follow every rule with zero exceptions.
+
+VOICE (master reference: her Cinco de Mayo caption style): thoughtful, storytelling-driven, NOT staccato. Structure: specific opening scene or claim, narrow to ACE's contrarian point of view, land it with something real, warm direct close. Third grade reading level. Real person, never a brand account.
+
+HARD RULES:
+- NEVER use em dashes. Use commas or periods.
+- NEVER use the word "budget".
+- NEVER teach, give tips, how-tos, or lead magnets. Name problems, never solve them step by step.
+- No jargon, no buzzwords, no guru tone.
+- Max 5 hashtags matched to the audience, always include #ACEGroupNY.
+- Speak to ONE specific person. Level 10 language that signals premium results. Guide, do not convince.
+- Hyper-specific reaction-trigger hooks (one tiny real scenario), single-truth statements, closing question or ask that is hard to scroll past.
+
+THE FOUR JOBS:
+- RECOGNITION: describe the ideal client's exact private moment so precisely she thinks "how did you know". Success = saves, shares.
+- PROOF: real ACE client work framed by OUTCOME not aesthetics (PJECC brand identity, Chabad Gap Year campaign, Adom Project x AJMA event content, Cinco de Mayo shoot). Tag clients. Success = DMs.
+- RAW: founder story from Rosie using the STORYTELLING WHEEL. Categories spell LIFE: LOVE (relationships, hobbies), IDENTITY (culture, faith, age), FITNESS (mind, body, spirit), EARNINGS (career, clients, skills). Pick or use the given category, then apply the 3 whys to descend SAFE then REAL then RAW. Only ship the RAW version, the truth that makes a reader feel something. Weave ACE's mission through it.
+- ACTION: the ACE+ offer (monthly creative partnership) with a keyword mechanic: "Comment [WORD] and I'll send you the breakdown." Never "send us a message".
+- TRIAL: 3 short trial reel concepts. Keep each under 55 words: hook line, 3-4 text beats, close.
+
+DEPTH RULE: every caption reaches at least REAL. RAW posts must reach RAW.
+AUDIENCE RULE: ACE aligns with brands, not industries. The reader is the founder of a feminine, powerful, meaningful, purpose-driven brand. Write in her world: her mission, her conviction, the gap between how much her brand means and how it currently shows up. Prospects should feel chosen, arriving already convinced.
+TREND RULE: if fresh trends are provided, use one ONLY if it genuinely fits the job and ACE's voice. Name the trend in on_screen_text notes if used. Never force a trend.
+
+BE CONCISE. Caption 90-160 words. on_screen_text under 60 words.
+
+OUTPUT: respond with ONLY a JSON object, no markdown fences, no preamble:
+{"hook":"...","on_screen_text":"...","caption":"...","depth":"REAL or RAW","life_category":"LOVE/IDENTITY/FITNESS/EARNINGS or null"}`;
+
+const out = document.getElementById("out");
+const go = document.getElementById("go");
+const calBtn = document.getElementById("cal");
+const trendsBar = document.getElementById("trendsBar");
+const trendsText = document.getElementById("trendsText");
+
+go.addEventListener("click", run);
+calBtn.addEventListener("click", pushWeekToCalendar);
+document.getElementById("refreshTrends").addEventListener("click", async ()=>{
+  trends = null;
+  await ensureTrends();
+});
+
+async function callClaude(userMsg, opts={}){
+  const body = {
+    model:"claude-sonnet-4-6",
+    max_tokens:1000,
+    system: opts.system || SYSTEM,
+    messages:[{role:"user",content:userMsg}]
+  };
+  if(opts.mcp) body.mcp_servers = opts.mcp;
+  if(opts.tools) body.tools = opts.tools;
+  const res = await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)
+  });
+  const data = await res.json();
+  if(data && data.error) throw new Error(data.error.message || "API error");
+  return data;
+}
+
+function textOf(data){
+  return (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n");
+}
+function extractJSON(data){
+  const t = textOf(data);
+  const a = t.indexOf("{"), z = t.lastIndexOf("}");
+  if(a===-1||z===-1||z<=a) throw new Error("no json");
+  return JSON.parse(t.slice(a, z+1));
+}
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+let lastError = "";
+async function generatePost(userMsg){
+  for(let attempt=0; attempt<3; attempt++){
+    let data = null;
+    try{
+      data = await callClaude(userMsg);
+      return extractJSON(data);
+    }catch(e){
+      lastError = e.message || String(e);
+      // if we got readable text but bad JSON, salvage it as a post
+      if(data){
+        const t = textOf(data).trim();
+        if(t.length > 80){
+          const lines = t.split("\n").filter(Boolean);
+          return {hook: lines[0]||"", on_screen_text:"", caption: t, depth:"REAL", life_category:null};
+        }
+      }
+      if(attempt < 2) await wait(900);
+    }
+  }
+  throw new Error(lastError);
+}
+
+async function ensureTrends(){
+  if(trends) return trends;
+  trendsBar.classList.remove("live");
+  trendsText.textContent = "Scraping what's working right now (last 3 days)...";
+  try{
+    const today = new Date().toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+    const data = await callClaude(
+      `Today is ${today}. Search the web for Instagram trending reels, trending audio, and trending formats from the LAST 3 DAYS only. Then reply with ONLY JSON, no fences: {"trends":[{"name":"short trend name","how":"one line on the format and how a brand uses it"}]} with at most 3 trends. Only include trends you can verify are from the last 3 days. If nothing verifiably recent is found, return {"trends":[]}.`,
+      { system:"You are a trend researcher with web search access. Search first, then your final reply must be only the JSON object, nothing else.",
+        tools:[{type:"web_search_20250305", name:"web_search"}] }
+    );
+    const parsed = extractJSON(data);
+    trends = (parsed.trends||[]).slice(0,3);
+  }catch(e){
+    trends = [];
+  }
+  if(trends.length){
+    trendsBar.classList.add("live");
+    trendsText.innerHTML = `<b>Working right now:</b> ` + trends.map(t=>`<span class="t">${esc(t.name)}</span>`).join(" ");
+  }else{
+    trendsText.textContent = "Trend scrape came back empty. Generating on the framework alone, hit Refresh to retry.";
+  }
+  return trends;
+}
+
+function trendBlock(){
+  if(!trends || !trends.length) return "";
+  return "\nFRESH TRENDS (scraped from the last 3 days, use one only if it truly fits):\n" +
+    trends.map(t=>`- ${t.name}: ${t.how}`).join("\n");
+}
+
+function run(){ state.mode==="single" ? generateSingle() : generateWeek(); }
+
+async function generateSingle(){
+  const ctx = document.getElementById("ctx").value.trim();
+  go.disabled = true; calBtn.style.display="none"; week=null;
+  out.innerHTML = '<div class="spin">Checking live trends</div>';
+  await ensureTrends();
+  out.innerHTML = '<div class="spin">Writing in your voice</div>';
+  try{
+    const lifeLine = state.job==="RAW" ? `\nLIFE CATEGORY: ${state.life==="auto"?"choose the best fit":state.life}` : "";
+    const post = await generatePost(`Write one Instagram post.\nJOB: ${state.job}\nFORMAT: ${state.format}\nAUDIENCE: ${state.vertical}${lifeLine}\nCONTEXT FROM ROSIE: ${ctx||"None. Generate a fresh angle."}${trendBlock()}`);
+    out.innerHTML = renderPost(post, null);
+  }catch(e){
+    out.innerHTML = `<div class="err">Generation failed after 3 tries. Reason: ${esc(lastError||"unknown")}. Hit Generate again, or refresh the page if it keeps happening.</div>`;
+  }finally{ go.disabled=false; }
+}
+
+const WEEK_SLOTS = [
+  {day:"Monday", job:"RECOGNITION", label:"Mon · Recognition"},
+  {day:"Wednesday", job:"PROOF", label:"Wed · Proof"},
+  {day:"Friday", job:"RAW", label:"Fri · Raw"},
+  {day:"Saturday", job:"TRIAL", label:"Sat · 3 Trial Reels"}
+];
+
+async function generateWeek(){
+  const ctx = document.getElementById("ctx").value.trim();
+  go.disabled = true; calBtn.style.display="none";
+  week = [];
+  out.innerHTML = '<div class="spin">Checking live trends</div>';
+  await ensureTrends();
+  for(const slot of WEEK_SLOTS){
+    out.innerHTML = week.map((p,i)=>renderPost(p, WEEK_SLOTS[i].label)).join("") + `<div class="spin">Writing ${slot.label}</div>`;
+    try{
+      const post = await generatePost(`Write one Instagram post.\nJOB: ${slot.job}\nFORMAT: ${slot.job==="TRIAL"?"3 trial reels, each under 55 words":"best fit for the job"}\nAUDIENCE: ${state.vertical}\nCONTEXT FROM ROSIE: ${ctx||"None. Generate fresh angles."}\nNOTE: ${slot.day} slot of a full week. Keep it distinct.${trendBlock()}`);
+      week.push(post);
+    }catch(e){
+      week.push({hook:"This slot failed after 3 tries. Tap Generate full week again to rebuild.",on_screen_text:"",caption:"",depth:"REAL",life_category:null,_failed:true});
+    }
+  }
+  out.innerHTML = week.map((p,i)=>renderPost(p, WEEK_SLOTS[i].label)).join("");
+  calBtn.style.display = "block";
+  go.disabled = false;
+}
+
+function nextDate(dayName){
+  const map = {Monday:1,Wednesday:3,Friday:5,Saturday:6};
+  const d = new Date();
+  let diff = (map[dayName] - d.getDay() + 7) % 7;
+  if(diff===0) diff = 7;
+  d.setDate(d.getDate()+diff);
+  return {y:d.getFullYear(), m:String(d.getMonth()+1).padStart(2,"0"), dd:String(d.getDate()).padStart(2,"0")};
+}
+
+async function pushWeekToCalendar(){
+  if(!week) return;
+  calBtn.disabled = true;
+  const status = document.createElement("div");
+  out.prepend(status);
+  let done = 0, tried = 0;
+  for(let i=0;i<week.length;i++){
+    const slot = WEEK_SLOTS[i], p = week[i];
+    if(p._failed) continue;
+    tried++;
+    const {y,m,dd} = nextDate(slot.day);
+    const time = slot.day==="Saturday" ? {s:"20:30",e:"21:30"} : {s:"09:00",e:"10:00"};
+    status.className="spin"; status.textContent = `Adding ${slot.label} to calendar`;
+    const desc = `HOOK: ${p.hook}\n\nON SCREEN:\n${p.on_screen_text}\n\nCAPTION:\n${p.caption}`;
+    try{
+      const data = await callClaude(
+        `Create a Google Calendar event.\nTitle: 📸 ACE — ${slot.label}\nStart: ${y}-${m}-${dd}T${time.s}:00 America/New_York\nEnd: ${y}-${m}-${dd}T${time.e}:00 America/New_York\nDescription:\n${desc}`,
+        { system:"You are a scheduling assistant. Use the Google Calendar tool to create exactly the event described. After creating it, reply with only the word DONE.",
+          mcp:[{type:"url",url:"https://calendarmcp.googleapis.com/mcp/v1",name:"google-calendar"}] }
+      );
+      const results = (data.content||[]).filter(b=>b.type==="mcp_tool_result");
+      if(results.length>0 || textOf(data).includes("DONE")) done++;
+    }catch(e){}
+  }
+  status.className = done===tried ? "ok" : "err";
+  status.textContent = done===tried
+    ? `All ${done} events are in your Google Calendar for next week.`
+    : `${done} of ${tried} events made it in. Tap again to retry, duplicates can be deleted in Calendar.`;
+  calBtn.disabled = false;
+}
+
+function esc(s){const d=document.createElement("div");d.textContent=s||"";return d.innerHTML;}
+
+function renderPost(p, dayLabel){
+  const depthRaw = (p.depth||"REAL").toUpperCase().includes("RAW");
+  const life = p.life_category && p.life_category!=="null" ? `<span class="lifetag">LIFE · ${esc(p.life_category)}</span>` : "";
+  return `
+  <div class="post">
+    <div class="post-head">
+      ${dayLabel?`<span class="daytag">${esc(dayLabel)}</span>`:`<span class="daytag">${esc(state.job)}</span>`}
+      ${life}
+      <span class="depthtag ${depthRaw?"raw":"real"}">${depthRaw?"Raw":"Real"} depth</span>
+    </div>
+    <div class="sec">
+      <div class="label">Hook · on screen</div>
+      <p class="hookline">${esc(p.hook)}</p>
+      <button class="copy" data-t="${esc(p.hook)}">Copy</button>
+    </div>
+    ${p.on_screen_text ? `
+    <div class="sec">
+      <div class="label">Text beats</div>
+      <div class="body">${esc(p.on_screen_text)}</div>
+      <button class="copy" data-t="${esc(p.on_screen_text)}">Copy</button>
+    </div>` : ``}
+    ${p.caption ? `
+    <div class="sec">
+      <div class="label">Caption</div>
+      <div class="body">${esc(p.caption)}</div>
+      <button class="copy" data-t="${esc(p.caption)}">Copy</button>
+    </div>` : ``}
+  </div>`;
+}
+
+out.addEventListener("click", async e=>{
+  const b = e.target.closest(".copy"); if(!b) return;
+  const tmp = document.createElement("textarea");
+  tmp.innerHTML = b.dataset.t;
+  await navigator.clipboard.writeText(tmp.value);
+  const old = b.textContent; b.textContent = "Copied";
+  setTimeout(()=>b.textContent = old, 1200);
+});
+</script>
+</body>
+</html>
