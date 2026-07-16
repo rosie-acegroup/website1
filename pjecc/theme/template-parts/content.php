@@ -1,0 +1,344 @@
+<?php
+/**
+ * PJECC one-page content.
+ * Shared source of truth for the WordPress theme (index.php) and the
+ * static preview (built with ../build-preview.php).
+ *
+ * Expects $asset — the base URL for /assets (no trailing slash).
+ */
+if ( ! isset( $asset ) ) { $asset = 'assets'; }
+?>
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="site-nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="#top" aria-label="PJECC home">
+      <img src="<?php echo $asset; ?>/img/logo-stacked.png" alt="PJECC — Palisades Jewish Early Childhood Center">
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#why">Why PJECC</a>
+      <a href="#programs">Programs</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="nav__right">
+      <a class="btn btn--sm" href="#enroll">Schedule a Tour</a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="top">
+  <span class="shape shape--1"><svg viewBox="0 0 100 100"><path fill="#f8b7c9" d="M50 6c6 14 24 14 30 0-2 15 12 26 24 22-13 6-13 24 0 30-15-2-26 12-22 24-6-13-24-13-30 0 2-15-12-26-24-22 13-6 13-24 0-30 15 2 26-12 22-24z"/></svg></span>
+  <span class="shape shape--2"><svg viewBox="0 0 100 100"><path fill="#8ccef1" d="M10 60c0-30 20-50 45-50 30 0 40 25 33 45-6 17 5 20-3 30-12 14-40 12-55-5C17 74 10 70 10 60z"/></svg></span>
+  <span class="shape shape--3"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#96be3d"/></svg></span>
+  <span class="shape shape--4"><svg viewBox="0 0 100 60"><path fill="#004623" d="M4 56C4 26 24 4 50 4s46 22 46 52H74c0-16-10-28-24-28S26 40 26 56z"/></svg></span>
+  <span class="shape shape--5"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#ffeb83"/></svg></span>
+  <span class="shape shape--6"><svg viewBox="0 0 100 100"><path fill="#306cb5" d="M50 4c8 20 26 20 34 0-4 20 14 34 30 26-16 12-16 34 0 46-16-8-34 6-30 26-8-20-26-20-34 0 4-20-14-34-30-26 16-12 16-34 0-46 16 8 34-6 30-26z"/></svg></span>
+
+  <div class="hero__inner">
+    <img class="hero__tree" src="<?php echo $asset; ?>/img/tree-submark.png" alt="">
+    <p class="eyebrow">Pacific Palisades &amp; Santa Monica &middot; Infants–TK</p>
+    <h1 class="hero__title">We're Home.<br>And So <em>Are You.</em></h1>
+    <p class="hero__lead">A warm, nature-inspired Jewish early childhood community where every child is known, every family belongs, and childhood is celebrated in all the ways that matter most.</p>
+    <div class="hero__cta">
+      <a class="btn" href="#enroll">Schedule a Tour</a>
+      <a class="btn btn--ghost" href="#programs">Explore Programs</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TAGLINE + STATS ==================== -->
+<section class="strip">
+  <div class="wrap">
+    <p class="strip__tag">A community that holds you.</p>
+    <div class="stats">
+      <div><span>20+</span><small>Years rooted in the Palisades</small></div>
+      <div><span>2</span><small>Campuses — Palisades &amp; Santa Monica</small></div>
+      <div><span>0–5</span><small>Infants through TK</small></div>
+      <div><span>Reggio</span><small>-inspired, outdoor learning</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about__grid">
+      <div class="about__copy reveal">
+        <p class="eyebrow">Our Story</p>
+        <h2 class="section-title">Rooted in Values.<br>Built for Generations.</h2>
+        <p class="section-sub" style="margin:1rem 0 1.6rem;">The Palisades welcomes PJECC back — stronger than ever.</p>
+        <p>Over 20 years ago, Chabad of the Pacific Palisades opened PJECC with a simple vision: a place where children could grow in an environment filled with warmth, curiosity, beauty, and genuine care. As our school grew, so did that vision — slowly shaping a campus and classrooms that feel alive with childhood.</p>
+        <p>After the Palisades fires forced a temporary move to Santa Monica, what began as a crisis response grew into an expansion. Today we're entering a new chapter: reopening our Palisades campus while continuing to nurture our Santa Monica community — serving both, and welcoming new families.</p>
+        <p>Through it all, our purpose has stayed the same: to create a place where every child is known, every family feels welcome, and childhood is celebrated in all the ways that matter most.</p>
+      </div>
+      <div class="media media--tall reveal" aria-hidden="true">
+        <!-- Swap this gradient block for a real classroom / campus photo -->
+        <span class="media__ph">Add a photo of the campus here</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ WHY ============================ -->
+<section class="section section--alt" id="why">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <p class="eyebrow">Why PJECC</p>
+      <h2 class="section-title">A Rare Kind of Joyful.</h2>
+      <p class="lead">Children aren't just cared for or just taught — they're genuinely guided to become thinkers, explorers, and confident individuals. Here's what makes childhood at PJECC different.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="card__icon i-lime"><svg viewBox="0 0 24 24" fill="none" stroke="#20360f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Reggio-Inspired</h3>
+        <p>Children are the driving force behind what they learn — engaging in collaborative, hands-on, joyful discovery that builds curiosity and resilience.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon i-blue"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M12 8c-3-4-8-3-9 1 4 1 6 4 9 3z"/><path d="M12 8c3-4 8-3 9 1-4 1-6 4-9 3z"/></svg></div>
+        <h3>Rooted in Nature</h3>
+        <p>One of the few outdoor Jewish preschools by the coast — a natural landscape of grass fields, gardens, and play built by the hands of our community.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon i-pink"><svg viewBox="0 0 24 24" fill="none" stroke="#004623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div>
+        <h3>Jewish Values, Woven In</h3>
+        <p>Judaism lives naturally in the rhythm of each day, nurturing kindness, respect, and a joyful connection to heritage — with every family welcomed.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon i-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="#5a4a10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 21c0-3.5 3-6 7-6s7 2.5 7 6"/><path d="M16 4a3.5 3.5 0 0 1 0 7"/><path d="M22 21c0-2.6-1.5-4.7-4-5.6"/></svg></div>
+        <h3>Small Classes, Low Ratios</h3>
+        <p>Small classes with low student-to-teacher ratios, led by specialists in early childhood development who know each child deeply.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon i-green"><svg viewBox="0 0 24 24" fill="none" stroke="#004623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s2-6 8-6 8 6 8 6"/><circle cx="12" cy="6" r="0"/><path d="M8 20c1.5-2 6.5-2 8 0"/><path d="M12 9v6"/></svg></div>
+        <h3>Play-Based &amp; Joyful</h3>
+        <p>Children learn best when they're having fun. We honor childhood rather than rush it — inspiring wonder through play, art, music, and exploration.</p>
+      </article>
+      <article class="card reveal">
+        <div class="card__icon i-deep"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 2.5-5 6-5"/><path d="M22 20c0-3-2.5-5-6-5"/><path d="M9 20c0-2 1.5-3 3-3s3 1 3 3"/></svg></div>
+        <h3>A Real Community</h3>
+        <p>We invest as deeply in our teachers and families as we do in our children. It's not just a program — it's a place that feels like family.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROGRAMS ============================ -->
+<section class="section" id="programs">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <p class="eyebrow">Our Classes — Chaverim</p>
+      <h2 class="section-title">Where Your Child's<br>Story Begins.</h2>
+      <p class="lead">From first steps to their leap toward kindergarten, every class meets children exactly where they are — with warmth, wonder, and room to grow.</p>
+    </div>
+    <div class="programs">
+      <article class="program program--pink reveal">
+        <p class="program__age">Chaverim Alef</p>
+        <h3>Infant Center</h3>
+        <p>A warm, loving first home away from home. Through responsive care, sensory play, music, and meaningful relationships, we build trust, connection, and a lifelong love of learning from the very beginning.</p>
+      </article>
+      <article class="program program--sky reveal">
+        <p class="program__age">Chaverim Bet</p>
+        <h3>Toddlers</h3>
+        <p>Curiosity comes alive. Children explore outdoors, create, climb, and build friendships through purposeful play — growing in confidence, independence, language, and social-emotional skills.</p>
+      </article>
+      <article class="program program--lime reveal">
+        <p class="program__age">Chaverim Gimmel</p>
+        <h3>2-Year-Olds</h3>
+        <p>Imagination takes center stage. Through open-ended materials, art, storytelling, and dramatic play, children develop creativity, communication, and a joyful love of learning.</p>
+      </article>
+      <article class="program program--yellow reveal">
+        <p class="program__age">Chaverim Daled</p>
+        <h3>3-Year-Olds</h3>
+        <p>Deeper discovery through hands-on investigations inspired by nature, literature, and Jewish traditions — encouraging collaboration, critical thinking, and the confidence to explore new ideas.</p>
+      </article>
+      <article class="program program--green reveal">
+        <p class="program__age">Chaverim Hey</p>
+        <h3>4-Year-Olds / TK</h3>
+        <p>Our oldest learners are confident, capable, and ready to lead. Alongside creative, purposeful play, they build a strong foundation in literacy, math, and problem-solving — ready for kindergarten and beyond.</p>
+      </article>
+      <a class="program program--blue reveal" href="#enroll" style="text-decoration:none;">
+        <p class="program__age">Find the right fit</p>
+        <h3>Not sure where<br>they belong?</h3>
+        <p>Schedule a tour and we'll help you find your child's class — and let you feel the community for yourself. →</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PHILOSOPHY ============================ -->
+<section class="section section--alt" id="philosophy">
+  <div class="wrap">
+    <div class="philosophy reveal">
+      <p class="eyebrow">Our Philosophy</p>
+      <blockquote>Educate a child <span>according to his way.</span></blockquote>
+      <p>At PJECC, we believe childhood is meant to be joyful. Every child is seen as an individual — full of curiosity, creativity, and endless potential. Our role is to create an environment where children feel safe to explore, ask questions, build friendships, and discover the world around them. We honor childhood rather than rush it.</p>
+      <p class="philosophy__cite">— The Torah's teaching, at the heart of everything we do</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CAMPUSES ============================ -->
+<section class="section" id="visit">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <p class="eyebrow">Visit Us</p>
+      <h2 class="section-title">Two Campuses.<br>One Community.</h2>
+      <p class="lead">Rooted in the same values, warmth, and excellence our families have trusted for generations — now welcoming children across two coastal campuses.</p>
+    </div>
+    <div class="campuses">
+      <article class="campus reveal">
+        <div class="campus__banner"><span class="campus__tag">Now Reopening</span></div>
+        <div class="campus__body">
+          <h3>Palisades Campus</h3>
+          <p>Our founding home in the Pacific Palisades — a natural, sun-filled campus of gardens, grass fields, and play, back and stronger than ever for the 2026–2027 school year.</p>
+          <a class="link" href="#enroll">Schedule a tour →</a>
+        </div>
+      </article>
+      <article class="campus reveal">
+        <div class="campus__banner"><span class="campus__tag">Now Enrolling</span></div>
+        <div class="campus__body">
+          <h3>Santa Monica Campus</h3>
+          <p>The warm community that grew from our new chapter — continuing to serve families with the same nurturing, individualized approach PJECC is known for.</p>
+          <a class="link" href="#enroll">Schedule a tour →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TESTIMONIAL ============================ -->
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="quote reveal">
+      <p>It's the school where kids actually love going. They learn so much, but it never feels like pressure — it feels like joy. And the community? It's like family.</p>
+      <cite>A PJECC Parent</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ENROLL / VISIT FORM ============================ -->
+<section class="section" id="enroll">
+  <div class="wrap">
+    <div class="enroll__grid">
+      <div class="reveal">
+        <p class="eyebrow">Come See Us</p>
+        <h2 class="section-title">Schedule a Tour.</h2>
+        <p class="lead" style="margin-bottom:2rem;">If you're considering enrolling for the 2026–2027 school year, now is the moment. Come see the space, meet our educators, and experience the community that makes PJECC so special.</p>
+        <ul class="contact-list">
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></span>
+            <span><strong>Email</strong><span>hello@pjecc.org</span></span>
+          </li>
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+            <span><strong>Call</strong><span>(310) 555-0100</span></span>
+          </li>
+          <li>
+            <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <span><strong>Campuses</strong><span>Pacific Palisades &amp; Santa Monica, CA</span></span>
+          </li>
+        </ul>
+      </div>
+      <div class="form-card reveal">
+        <form id="tour-form" novalidate>
+          <div class="field">
+            <label for="pname">Parent / Guardian Name</label>
+            <input id="pname" name="pname" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="pemail">Email</label>
+            <input id="pemail" name="pemail" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="pphone">Phone</label>
+            <input id="pphone" name="pphone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="pcampus">Campus of Interest</label>
+            <select id="pcampus" name="pcampus">
+              <option>Pacific Palisades</option>
+              <option>Santa Monica</option>
+              <option>Either / Not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pchild">Child's Age</label>
+            <select id="pchild" name="pchild">
+              <option>Infant (0–1)</option>
+              <option>Toddler (1–2)</option>
+              <option>2 years</option>
+              <option>3 years</option>
+              <option>4 years / TK</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pmsg">Anything you'd like us to know?</label>
+            <textarea id="pmsg" name="pmsg" rows="3"></textarea>
+          </div>
+          <button class="btn" type="submit" style="width:100%;justify-content:center;">Request a Tour</button>
+          <p class="form-note" hidden style="margin-top:1rem;color:var(--green);font-weight:700;">Thank you! We'll be in touch soon. 🌳</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CTA BAND ============================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="cta reveal">
+      <p class="eyebrow" style="color:var(--yellow);">Join Us This Fall</p>
+      <h2>Where Your Child's<br>Story Begins.</h2>
+      <p>PJECC is growing — and we'd love for you to be part of it from the very beginning.</p>
+      <div class="cta__btns">
+        <a class="btn btn--light" href="#enroll">Schedule a Tour</a>
+        <a class="btn btn--ghost" style="color:var(--cream);border-color:var(--cream);" href="#enroll">Enroll for 2026–2027</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__logo">
+        <img src="<?php echo $asset; ?>/img/logo-primary.png" alt="PJECC — Palisades Jewish Early Childhood Center">
+        <p>A Chabad-affiliated Jewish early childhood center serving infants through TK — open to families of all backgrounds. We're home. And so are you.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#f9f4e7" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-3a4 4 0 0 0-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="mailto:hello@pjecc.org" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#why">Why PJECC</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#enroll">Schedule a Tour</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#visit">Palisades Campus</a></li>
+          <li><a href="#visit">Santa Monica Campus</a></li>
+          <li><a href="mailto:hello@pjecc.org">hello@pjecc.org</a></li>
+          <li><a href="tel:+13105550100">(310) 555-0100</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <?php echo function_exists('date') ? date('Y') : '2026'; ?> Palisades Jewish Early Childhood Center. All rights reserved.</span>
+      <span>Branding &amp; site by <a href="https://acegroupny.com">The Ace Group</a></span>
+    </div>
+  </div>
+</footer>
