@@ -158,7 +158,7 @@ hr{border:none;border-top:1px solid rgba(102,47,71,0.12);margin:0 3.5rem;}
 .testimonials{padding:4rem 3.5rem;background:var(--cream);}
 .testimonials-inner{max-width:1200px;margin:0 auto;}
 .test-heading{font-family:var(--f);font-weight:700;font-style:italic;font-size:clamp(40px,6vw,64px);color:var(--black);margin-bottom:3.5rem;text-align:left;}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.test-carousel{position:relative;}.test-grid{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;align-items:flex-start;padding:0.5rem 0 1.2rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;}.test-grid::-webkit-scrollbar{display:none;}.test-grid>.test-card{flex:0 0 340px;scroll-snap-align:start;min-height:290px;}.test-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(102,47,71,0.25);background:var(--cream);color:var(--plum);font-family:Georgia,serif;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;padding-bottom:4px;}.test-arrow:hover{background:var(--plum);color:var(--cream);border-color:var(--plum);}.test-arrow[data-dir="-1"]{left:-18px;}.test-arrow-next{right:-18px;}
 .test-card{padding:2.5rem;border:1px solid rgba(102,47,71,0.12);background:var(--paper);transition:border-color 0.3s,transform 0.3s;}
 .test-card:hover{border-color:var(--mauve);transform:translateY(-4px);}
 .quote-mark{font-family:var(--f);font-weight:700;font-style:italic;font-size:56px;color:var(--mauve);line-height:1;margin-bottom:1rem;opacity:0.5;}
@@ -218,7 +218,7 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
   .intro-left{display:none;}
   .services-section{padding:5rem 1.5rem;}
   .testimonials{padding:5rem 1.5rem;}
-  .test-grid{grid-template-columns:1fr;}
+  .test-grid>.test-card{flex-basis:82%;}.test-arrow{display:none;}
   .ig-section{padding:4rem 1.5rem;}
   .cta-section{padding:4rem 2rem;text-align:center;position:relative;overflow:hidden;min-height:unset;}
   footer{padding:3rem 1.5rem 2rem;}
@@ -424,9 +424,9 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
 <section class="hero" id="hero">
   <div class="hero-bg-img" id="heroBg"></div>
   <div class="hero-overlay"></div>
-  <p class="hero-tag" style="letter-spacing:0.2em;">For founders building something that lasts</p>
+  <p class="hero-tag">Founder Led Creative Agency</p>
   <h1 class="hero-h1">You're not building a business.<br><em>You're building a legacy.</em></h1>
-  <p class="hero-sub">We build the brand people remember and the strategy that sells it out, so what you create today is still talked about years from now.</p>
+  <p class="hero-sub">Making bold moves to break away from expectation.</p>
   <div class="hero-btns">
     <a href="https://calendly.com/theacegroupny/brand-discovery" target="_blank" class="btn-dark">Book a Brand Discovery Call</a>
   </div>
@@ -666,42 +666,46 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
 <section class="testimonials">
   <div class="testimonials-inner">
     <h2 class="test-heading reveal">Testimonials</h2>
-    <div class="test-grid">
-      <div class="test-card reveal">
+    <div class="test-carousel">
+      <button class="test-arrow" data-dir="-1" aria-label="Previous testimonials">‹</button>
+      <div class="test-grid" id="testTrack">
+      <div class="test-card">
         <div class="quote-mark">"</div>
         <p class="quote-text">She is so good at listening to what you want. Creates a mood board to make sure you're on the same page. So good with details and it's very personal. She really cares about her work. Now that I started, I can't stop.</p>
         <p class="quote-author">Chana David</p>
       </div>
-      <div class="test-card reveal d1">
+      <div class="test-card">
         <div class="quote-mark">"</div>
         <p class="quote-text">The Ace Group did a fantastic job making our ads for our growing construction company. Customer service was fantastic. We are very happy with the outcome.</p>
         <p class="quote-author">Menachem Landau</p>
       </div>
-      <div class="test-card reveal d2">
+      <div class="test-card">
         <div class="quote-mark">"</div>
         <p class="quote-text">Rosie was such a pleasure to work with. So creative and responsive. Would highly recommend!</p>
         <p class="quote-author">Mindee Meyer</p>
       </div>
-      <div class="test-card reveal d3">
+      <div class="test-card">
         <div class="quote-mark">"</div>
         <p class="quote-text">I've worked with The Ace Group NY a few times, on different projects. The product is outstanding. Creative, original, and insightful, conveying the nuances in the concept. Rosie is also so nice to deal with, very kind and patient. Highly recommend!</p>
         <p class="quote-author">Devora Posner</p>
       </div>
-      <div class="test-card reveal d4">
+      <div class="test-card">
         <div class="quote-mark">"</div>
-        <p class="quote-text">We worked with two high end, reputable companies before finding Ace Group. We spent hours in meetings and presentations, yet still didn't have a suitable name or logo for our new restaurants. We called The Ace Group, explained our needs in one phone call, and six hours later were presented with a full package: a name, a logo, a tagline, and marketing ideas for menus, bags, merch, banners, and more. The cost was a fraction of the corporations we used, and the individual care was 5 star.</p>
+        <p class="quote-text">We worked with two high end firms before finding Ace Group and still didn't have a name or logo for our new restaurants. We called The Ace Group, explained our needs in one call, and six hours later had a full package: name, logo, tagline, and marketing for menus, bags, merch, and banners. A fraction of the cost, and the individual care was 5 star.</p>
         <p class="quote-author">Dvora Deitsch</p>
       </div>
-      <div class="test-card reveal d5">
+      <div class="test-card">
         <div class="quote-mark">"</div>
         <p class="quote-text">We have worked with Rosie from Ace Group a couple of times now and have been super happy each time. She is quick, responsive, talented, and has a great eye. We look forward to using The Ace Group for more projects in the future!</p>
         <p class="quote-author">Necha Uminer</p>
       </div>
-      <div class="test-card reveal d6">
+      <div class="test-card">
         <div class="quote-mark">"</div>
         <p class="quote-text">We absolutely love the branding Rosie created for us! She took the time to really understand who we are and turned our ideas into something even better than we imagined. She's incredibly talented, a pleasure to work with, and made the whole process enjoyable from start to finish. Highly recommend!</p>
         <p class="quote-author">Sheina Cunin</p>
       </div>
+    </div>
+      <button class="test-arrow test-arrow-next" data-dir="1" aria-label="Next testimonials">›</button>
     </div>
   </div>
 </section>
@@ -855,6 +859,20 @@ function setS(v){if(inp){inp.value=v;inp.focus();renderS(v);}}
   },{passive:true});
 })();
 
+</script>
+<script>
+(function(){
+  var track=document.getElementById('testTrack');
+  if(!track) return;
+  document.querySelectorAll('.test-arrow').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var dir=parseInt(btn.getAttribute('data-dir'),10);
+      var card=track.querySelector('.test-card');
+      var step=card?card.getBoundingClientRect().width+24:track.clientWidth*0.8;
+      track.scrollBy({left:dir*step,behavior:'smooth'});
+    });
+  });
+})();
 </script>
 </body>
 </html>
