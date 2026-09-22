@@ -646,7 +646,7 @@ input::placeholder{color:var(--muted);opacity:.7}
   <div class="welcomeband">
     <p class="wb-kicker">Welcome to your</p>
     <h2>one space to learn it, run it,<br>and ace it on your own.</h2>
-    <div style="margin-top:30px"><button class="btn lg" id="hero-cta">Start the free 5-day reset</button></div>
+    <div style="margin-top:30px"><button class="btn lg" id="hero-cta">Create your free account</button></div>
   </div>
 
   <div class="band">
@@ -799,6 +799,7 @@ input::placeholder{color:var(--muted);opacity:.7}
    button tells the visitor the product is not open yet. */
 var CONFIG = {
   demo: false,
+  coursesLocked: true,   // set false when lesson content is uploaded
   checkout: {
     engine:  "https://buy.stripe.com/9B6bJ0ekQ7nm4xf8tc2cg06",   // The Content Engine
     inhouse: "https://buy.stripe.com/28E9AS5OkbDC3tb9xg2cg07",   // Ace It: Running Your Own Marketing
@@ -913,6 +914,13 @@ function progress(c){
   return { done:d, total:all.length, pct: all.length ? Math.round(d/all.length*100) : 0 };
 }
 function money(n){ return "$" + n.toLocaleString("en-US"); }
+function storageOk(){
+  try{ localStorage.setItem("__aceit_t","1"); localStorage.removeItem("__aceit_t"); return true; }catch(e){ return false; }
+}
+function maskEmail(e){
+  var p = String(e).split("@");
+  return (p[0]||"").slice(0,2) + "\u2022\u2022\u2022@" + (p[1]||"");
+}
 function hashPw(p){
   return crypto.subtle.digest("SHA-256", new TextEncoder().encode("aceit:" + p)).then(function(buf){
     return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2, "0"); }).join("");
@@ -931,6 +939,7 @@ function toast(msg){
 
 var current = "landing";
 function show(view, arg){
+  if(!S.user && view !== "landing") view = "landing";
   if(view === "admin" && !isOwner()) view = "dashboard";
   current = view;
   ["landing","dashboard","course","catalog","agency","account","admin"].forEach(function(v){
@@ -976,7 +985,7 @@ function authModal(mode, after){
   modal(
     '<div class="mhead"><h2>' + (isSignup ? "Create your account" : "Welcome back") + '</h2>' +
     '<p class="msub">' + (isSignup
-      ? "Free access to The 5-Day Feed Reset, and anything you buy later lands in the same place."
+      ? "Create your account now and be first in when the courses open."
       : "Log in to pick up where you left off.") + '</p></div>' +
     '<div class="mbody">' +
       (isSignup ? '<div style="display:flex;gap:10px"><div style="flex:1"><label for="f-name">First name</label><input id="f-name" type="text" autocomplete="given-name"></div><div style="flex:1"><label for="f-last">Last name</label><input id="f-last" type="text" autocomplete="family-name"></div></div>' : '') +
@@ -1008,6 +1017,7 @@ function authModal(mode, after){
       var focus = document.getElementById("f-focus").value.trim();
       if(!first){ toast("Add your first name so we know what to call you."); return; }
       if(pw.length < 6){ toast("Choose a password with at least 6 characters."); return; }
+      if(!storageOk()){ toast("Your browser is blocking storage (private mode?). Open this page in a normal window to create your account."); return; }
       hashPw(pw).then(function(hash){
         var name = (first + " " + last).trim();
         S.account = { name: name || email.split("@")[0], first: first, last: last, email: email, instagram: ig, heard: heard, focus: focus, pw: hash, joined: new Date().toISOString().slice(0,10) };
@@ -1025,7 +1035,7 @@ function authModal(mode, after){
     }
     var acct = S.account || S.user;
     if(!acct){ toast("No account on this device yet. Create one first."); return; }
-    if(acct.email && acct.email.toLowerCase() !== email.toLowerCase()){ toast("That email does not match the account on this device."); return; }
+    if(acct.email && acct.email.toLowerCase() !== email.toLowerCase()){ toast("This device has an account for " + maskEmail(acct.email) + ". Use that email, or create a new account."); return; }
     if(!pw){ toast("Enter your password."); return; }
     hashPw(pw).then(function(hash){
       if(acct.pw && acct.pw !== hash){ toast("Wrong password."); return; }
@@ -1041,6 +1051,7 @@ function authModal(mode, after){
 }
 
 function checkout(prod){
+  if(CONFIG.coursesLocked){ toast("Courses are opening soon. Your account is ready for when they do."); return; }
   if(!CONFIG.demo){
     var link = CONFIG.checkout[prod.id];
     if(link){ window.location.href = link; return; }
@@ -1097,8 +1108,11 @@ function renderLanding(){
       '<span class="price">' + (free ? "Free" : money(c.price) + (c.per ? '<small> /mo</small>' : "")) + '</span></div>' +
       '<p class="blurb">' + esc(c.blurb) + '</p>' +
       '<div class="meta"><span>' + meta + '</span></div>' +
-      '<button class="btn ' + (free ? "" : "ghost ") + 'block" data-buy="' + c.id + '">' +
-        (free ? "Start free" : "Get " + esc(c.title)) + '</button>' +
+      (CONFIG.coursesLocked
+        ? (free ? '<button class="btn block" data-buy="' + c.id + '">Join free &middot; opening soon</button>'
+                : '<button class="btn ghost block" disabled>Coming soon</button>')
+        : '<button class="btn ' + (free ? "" : "ghost ") + 'block" data-buy="' + c.id + '">' +
+          (free ? "Start free" : "Get " + esc(c.title)) + '</button>') +
       '</article>';
   }).join("");
 
@@ -1166,7 +1180,7 @@ function renderDashboard(){
       '<p class="next">' + (next ? "Up next: " + esc(next.t) : "Finished. Every lesson complete.") + '</p>' +
       '<div class="bar"><i style="width:' + p.pct + '%"></i></div>' +
       '<p class="pct tabnum">' + p.done + ' of ' + p.total + ' lessons &middot; ' + p.pct + '%</p>' +
-      '</div><div><button class="btn" data-open="' + c.id + '">' + (p.done ? "Continue" : "Start") + '</button></div></div>';
+      '</div><div>' + (CONFIG.coursesLocked ? '<button class="btn quiet" disabled>Coming soon</button>' : '<button class="btn" data-open="' + c.id + '">' + (p.done ? "Continue" : "Start") + '</button>') + '</div></div>';
   }).join("") + '</div>';
 
   if(rest.length){
@@ -1176,7 +1190,7 @@ function renderDashboard(){
         '<h3 style="margin-top:9px">' + esc(c.title) + '</h3></div><span class="price">' + money(c.price) + '</span></div>' +
         '<p class="blurb">' + esc(c.blurb) + '</p>' +
         '<div class="meta"><span>' + lessons(c).length + ' lessons</span></div>' +
-        '<button class="btn ghost block" data-get="' + c.id + '">Unlock for ' + money(c.price) + '</button></article>';
+        (CONFIG.coursesLocked ? '<button class="btn ghost block" disabled>Coming soon</button>' : '<button class="btn ghost block" data-get="' + c.id + '">Unlock for ' + money(c.price) + '</button>') + '</article>';
       }).join("") + '</div>';
   }
 
@@ -1191,6 +1205,7 @@ var activeLesson = {};
 function renderCourse(cid){
   var c = course(cid);
   if(!c) return show("dashboard");
+  if(CONFIG.coursesLocked){ toast("Lessons are coming soon. We will let you know the moment they open."); return show("dashboard"); }
   if(!owns(cid)){ checkout(c); return show("dashboard"); }
 
   var all = lessons(c);
@@ -1312,9 +1327,11 @@ function renderCatalog(){
       '<span class="price">' + (c.price === 0 ? "Free" : money(c.price) + (c.per ? '<small> /mo</small>' : "")) + '</span></div>' +
       '<p class="blurb">' + esc(c.blurb) + '</p>' +
       '<div class="meta"><span>' + count + '</span></div>' +
-      (has
+      (CONFIG.coursesLocked
+        ? '<button class="btn ghost block" disabled>Coming soon</button>'
+        : (has
         ? (c.id === "vault" ? '<button class="btn quiet block" disabled>Active</button>' : '<button class="btn block" data-open2="' + c.id + '">Open course</button>')
-        : '<button class="btn ghost block" data-get2="' + c.id + '">' + (c.price === 0 ? "Start free" : "Unlock for " + money(c.price)) + '</button>') +
+        : '<button class="btn ghost block" data-get2="' + c.id + '">' + (c.price === 0 ? "Start free" : "Unlock for " + money(c.price)) + '</button>')) +
       '</article>';
   }).join("") + '</div>';
 
@@ -1376,12 +1393,13 @@ function renderAccount(){
     '<h2 style="font-size:19px;margin-bottom:12px">Purchases</h2>' +
     '<div class="tablewrap"><table><thead><tr><th>Item</th><th>Paid</th><th>Date</th><th></th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
     '<p class="muted" style="font-size:13px;margin-top:16px">Email rosie@acegroupny.com with any questions.</p>' +
-    '<button class="btn ghost sm" id="reset-demo" style="margin-top:22px">Reset this demo</button>';
+    (isOwner() ? '<button class="btn ghost sm" id="reset-demo" style="margin-top:22px">Reset this demo</button>' : '');
 
   v.querySelectorAll("[data-receipt]").forEach(function(b){
     b.addEventListener("click", function(){ toast("Demo only. The live portal emails the Stripe receipt for " + b.dataset.receipt + "."); });
   });
-  v.querySelector("#reset-demo").addEventListener("click", function(){
+  var rd = v.querySelector("#reset-demo");
+  if(rd) rd.addEventListener("click", function(){
     S = { user:null, owned:["reset"], done:{} };
     activeLesson = {}; save(); syncNav(); show("landing");
     toast("Demo reset. You are back to a fresh visitor.");
