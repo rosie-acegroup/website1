@@ -732,6 +732,9 @@ var CONFIG = {
     inhouse: "https://buy.stripe.com/28E9AS5OkbDC3tb9xg2cg07",   // Ace It: Running Your Own Marketing
     vault:   "https://buy.stripe.com/8x26oG7Ws8rqd3L38S2cg08"    // The Template Vault
   },
+  // Paste your CRM address + /api/lead here once the endpoint is deployed,
+  // e.g. "https://YOUR-CRM-URL/api/lead". Empty = sign-ups are not forwarded.
+  crmLead: "",
   contactEmail: "rosie@acegroupny.com"
 };
 
@@ -909,6 +912,13 @@ function authModal(mode, after){
     S.user = { name: name || email.split("@")[0], email: email, biz: biz || "", joined: new Date().toISOString().slice(0,10) };
     if(!owns("reset")) S.owned.push("reset");
     save(); syncNav(); closeModal();
+    if(isSignup && CONFIG.crmLead){
+      try{
+        fetch(CONFIG.crmLead, { method:"POST", keepalive:true,
+          headers:{ "content-type":"text/plain" },
+          body: JSON.stringify({ name:S.user.name, email:S.user.email, business:S.user.biz, source:"Ace It academy" }) });
+      }catch(_){ }
+    }
     toast(isSignup ? "Account created. The free course is unlocked." : "Logged in.");
     if(after) after(); else show("dashboard");
   });
