@@ -973,7 +973,7 @@ function authModal(mode, after){
       '<div><label for="f-email">Email</label><input id="f-email" type="email" placeholder="you@yourbusiness.com" autocomplete="email"></div>' +
       (isSignup ? '<div><label for="f-ig">Instagram</label><input id="f-ig" type="text" placeholder="@yourhandle"></div>' : '') +
       (isSignup ? '<div><label for="f-heard">How did you hear about us?</label><select id="f-heard"><option value="">Choose one</option><option>Instagram</option><option>Word of mouth</option><option>Google search</option><option>I am an Ace Group client</option><option>Other</option></select></div>' : '') +
-      (isSignup ? '<div><label for="f-focus">What are you most looking to work on?</label><input id="f-focus" type="text" placeholder="Social media, email, filming..."></div>' : '') +
+      (isSignup ? '<div><label for="f-focus">What are you most looking to learn?</label><input id="f-focus" type="text" placeholder="Social media, email, filming..."></div>' : '') +
       '<button class="btn block lg" id="f-go">' + (isSignup ? "Create account and start" : "Log in") + '</button>' +
       '<p class="swap">' + (isSignup ? 'Already have an account? <button id="f-swap">Log in</button>' : 'New here? <button id="f-swap">Create one</button>') + '</p>' +
       '<p class="muted" style="font-size:12px;text-align:center">No password needed. Your progress is saved on this device.</p>' +
@@ -1336,7 +1336,7 @@ function renderAccount(){
       '<dt>Name</dt><dd>' + esc(S.user.name) + '</dd>' +
       '<dt>Email</dt><dd>' + esc(S.user.email) + '</dd>' +
       '<dt>Instagram</dt><dd>' + (S.user.instagram ? esc(S.user.instagram) : '<span class="muted">Not set</span>') + '</dd>' +
-      '<dt>Working on</dt><dd>' + (S.user.focus ? esc(S.user.focus) : '<span class="muted">Not set</span>') + '</dd>' +
+      '<dt>Learning</dt><dd>' + (S.user.focus ? esc(S.user.focus) : '<span class="muted">Not set</span>') + '</dd>' +
       '<dt>Member since</dt><dd class="tabnum">' + esc(S.user.joined) + '</dd>' +
       '<dt>Membership</dt><dd>' + (S.member ? "Template Vault, active" : '<span class="muted">Not subscribed</span>') + '</dd>' +
     '</dl></div>' +
