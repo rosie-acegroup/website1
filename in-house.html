@@ -366,11 +366,12 @@ nav{line-height:1.7;}
 /* ---------- app shell ---------- */
 .shell{display:grid;grid-template-columns:216px 1fr;gap:34px;max-width:1180px;margin:89px auto 0;padding:26px 20px 60px;align-items:start}
 .rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 78px);display:flex;flex-direction:column;gap:2px}
-.rail button{
+.rail button,.rail a{
   display:flex;align-items:center;gap:10px;width:100%;text-align:left;
   padding:9px 12px;border-radius:8px;font-size:14px;color:var(--muted);font-weight:500;white-space:nowrap;
 }
-.rail button:hover{background:var(--paper);color:var(--text)}
+.rail button:hover,.rail a:hover{background:var(--paper);color:var(--text)}
+.rail a{text-decoration:none}
 .rail button[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .rail .sep{height:1px;background:var(--line);margin:12px 4px}
 .rail .cap{padding:0 12px 6px}
@@ -721,7 +722,7 @@ input::placeholder{color:var(--muted);opacity:.7}
     <div class="cap eyebrow" id="logo">Your account</div>
     <button data-go="dashboard">My courses</button>
     <button data-go="catalog">Browse library</button>
-    <button data-go="agency">Work with Ace</button>
+    <a href="https://calendly.com/theacegroupny/brand-discovery" target="_blank">Work with Ace</a>
     <button data-go="account">Account</button>
     <div class="sep"></div>
     <div class="cap eyebrow">Owner</div>
