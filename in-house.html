@@ -496,7 +496,7 @@ tr:last-child td{border-bottom:0}
 .modal .msub{color:var(--muted);font-size:14px;margin-top:8px}
 .modal .mbody{padding:20px 24px 24px;display:flex;flex-direction:column;gap:13px}
 label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
-input[type=text],input[type=email],select{
+input[type=text],input[type=email],input[type=password],select{
   width:100%;padding:10px 12px;border-radius:9px;border:1px solid var(--line);
   background:var(--paper-2);color:var(--text);font:inherit;font-size:14px;
 }
@@ -895,6 +895,7 @@ function load(){
   try{ var raw = localStorage.getItem(KEY); if(raw){ var p = JSON.parse(raw); if(p && typeof p === "object"){ S = p; } } }catch(e){}
   if(!S.owned) S.owned = ["reset"];
   if(!S.done) S.done = {};
+  if(!S.account && S.user) S.account = S.user;
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
@@ -908,6 +909,11 @@ function progress(c){
   return { done:d, total:all.length, pct: all.length ? Math.round(d/all.length*100) : 0 };
 }
 function money(n){ return "$" + n.toLocaleString("en-US"); }
+function hashPw(p){
+  return crypto.subtle.digest("SHA-256", new TextEncoder().encode("aceit:" + p)).then(function(buf){
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2, "0"); }).join("");
+  });
+}
 function esc(s){ return String(s).replace(/[&<>"]/g, function(ch){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]; }); }
 
 /* ============ chrome ============ */
@@ -965,40 +971,63 @@ function authModal(mode, after){
     '<div class="mbody">' +
       (isSignup ? '<div style="display:flex;gap:10px"><div style="flex:1"><label for="f-name">First name</label><input id="f-name" type="text" placeholder="Rosie" autocomplete="given-name"></div><div style="flex:1"><label for="f-last">Last name</label><input id="f-last" type="text" placeholder="Ben-Abou" autocomplete="family-name"></div></div>' : '') +
       '<div><label for="f-email">Email</label><input id="f-email" type="email" placeholder="you@yourbusiness.com" autocomplete="email"></div>' +
+      '<div><label for="f-pw">' + (isSignup ? 'Create a password' : 'Password') + '</label><input id="f-pw" type="password" placeholder="' + (isSignup ? 'At least 6 characters' : 'Your password') + '" autocomplete="' + (isSignup ? 'new-password' : 'current-password') + '"></div>' +
       (isSignup ? '<div><label for="f-ig">Instagram</label><input id="f-ig" type="text" placeholder="@yourhandle"></div>' : '') +
       (isSignup ? '<div><label for="f-heard">How did you hear about us?</label><select id="f-heard"><option value="">Choose one</option><option>Instagram</option><option>Word of mouth</option><option>Google search</option><option>I am an Ace Group client</option><option>Other</option></select></div>' : '') +
       (isSignup ? '<div><label for="f-focus">What are you most looking to learn?</label><input id="f-focus" type="text" placeholder="Social media, email, filming..."></div>' : '') +
       '<button class="btn block lg" id="f-go">' + (isSignup ? "Create account and start" : "Log in") + '</button>' +
       '<p class="swap">' + (isSignup ? 'Already have an account? <button id="f-swap">Log in</button>' : 'New here? <button id="f-swap">Create one</button>') + '</p>' +
-      '<p class="muted" style="font-size:12px;text-align:center">No password needed. Your progress is saved on this device.</p>' +
+      '<p class="muted" style="font-size:12px;text-align:center">Your account and progress are saved on this device.</p>' +
     '</div>'
   );
   document.getElementById("f-swap").addEventListener("click", function(){ authModal(isSignup ? "login" : "signup", after); });
   document.getElementById("f-go").addEventListener("click", function(){
     var email = document.getElementById("f-email").value.trim();
-    var first = isSignup ? document.getElementById("f-name").value.trim() : "";
-    var last = isSignup ? document.getElementById("f-last").value.trim() : "";
-    var ig = isSignup ? document.getElementById("f-ig").value.trim() : "";
-    var heard = isSignup ? document.getElementById("f-heard").value : "";
-    var focus = isSignup ? document.getElementById("f-focus").value.trim() : "";
+    var pw = document.getElementById("f-pw").value;
     if(!email || email.indexOf("@") < 1){ toast("Enter an email address so we can create your login."); return; }
-    if(isSignup && !first){ toast("Add your first name so we know what to call you."); return; }
-    var name = isSignup ? (first + " " + last).trim() : ((S.user && S.user.name) || email.split("@")[0]);
-    S.user = { name: name || email.split("@")[0], first: first, last: last, email: email, instagram: ig, heard: heard, focus: focus, joined: new Date().toISOString().slice(0,10) };
-    if(!owns("reset")) S.owned.push("reset");
-    save(); syncNav(); closeModal();
-    if(isSignup && CONFIG.crmLead){
-      try{
-        fetch(CONFIG.crmLead, { method:"POST", keepalive:true,
-          headers:{ "content-type":"text/plain" },
-          body: JSON.stringify({ name:S.user.name, email:S.user.email, instagram:S.user.instagram, heard:S.user.heard, focus:S.user.focus, source:"Ace It academy" }) });
-      }catch(_){ }
+    function finish(msg){
+      if(!owns("reset")) S.owned.push("reset");
+      save(); syncNav(); closeModal(); toast(msg);
+      if(after) after(); else show("dashboard");
     }
-    toast(isSignup ? "Account created. The free course is unlocked." : "Logged in.");
-    if(after) after(); else show("dashboard");
+    if(isSignup){
+      var first = document.getElementById("f-name").value.trim();
+      var last = document.getElementById("f-last").value.trim();
+      var ig = document.getElementById("f-ig").value.trim();
+      var heard = document.getElementById("f-heard").value;
+      var focus = document.getElementById("f-focus").value.trim();
+      if(!first){ toast("Add your first name so we know what to call you."); return; }
+      if(pw.length < 6){ toast("Choose a password with at least 6 characters."); return; }
+      hashPw(pw).then(function(hash){
+        var name = (first + " " + last).trim();
+        S.account = { name: name || email.split("@")[0], first: first, last: last, email: email, instagram: ig, heard: heard, focus: focus, pw: hash, joined: new Date().toISOString().slice(0,10) };
+        S.user = S.account;
+        if(CONFIG.crmLead){
+          try{
+            fetch(CONFIG.crmLead, { method:"POST", keepalive:true,
+              headers:{ "content-type":"text/plain" },
+              body: JSON.stringify({ name:S.user.name, email:S.user.email, instagram:S.user.instagram, heard:S.user.heard, focus:S.user.focus, source:"Ace It academy" }) });
+          }catch(_){ }
+        }
+        finish("Account created. The free course is unlocked.");
+      });
+      return;
+    }
+    var acct = S.account || S.user;
+    if(!acct){ toast("No account on this device yet. Create one first."); return; }
+    if(acct.email && acct.email.toLowerCase() !== email.toLowerCase()){ toast("That email does not match the account on this device."); return; }
+    if(!pw){ toast("Enter your password."); return; }
+    hashPw(pw).then(function(hash){
+      if(acct.pw && acct.pw !== hash){ toast("Wrong password."); return; }
+      if(!acct.pw){ acct.pw = hash; }
+      S.account = acct; S.user = acct;
+      finish("Logged in.");
+    });
   });
-  var f = document.getElementById("f-email");
-  f.addEventListener("keydown", function(e){ if(e.key === "Enter") document.getElementById("f-go").click(); });
+  ["f-email","f-pw"].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener("keydown", function(e){ if(e.key === "Enter") document.getElementById("f-go").click(); });
+  });
 }
 
 function checkout(prod){
