@@ -724,9 +724,11 @@ input::placeholder{color:var(--muted);opacity:.7}
     <button data-go="catalog">Browse library</button>
     <a href="https://calendly.com/theacegroupny/brand-discovery" target="_blank">Work with Ace</a>
     <button data-go="account">Account</button>
-    <div class="sep"></div>
-    <div class="cap eyebrow">Owner</div>
-    <button data-go="admin">Admin</button>
+    <div id="ownerZone" style="display:contents" hidden>
+      <div class="sep"></div>
+      <div class="cap eyebrow">Owner</div>
+      <button data-go="admin">Admin</button>
+    </div>
     <div class="sep"></div>
     <div id="nav-in" hidden style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:4px 12px">
       <span class="muted" style="font-size:13px" id="nav-name"></span>
@@ -927,6 +929,7 @@ function toast(msg){
 
 var current = "landing";
 function show(view, arg){
+  if(view === "admin" && !isOwner()) view = "dashboard";
   current = view;
   ["landing","dashboard","course","catalog","agency","account","admin"].forEach(function(v){
     var el = document.getElementById("view-" + v);
@@ -945,10 +948,15 @@ function show(view, arg){
   window.scrollTo(0,0);
 }
 
+function isOwner(){
+  return !!(S.user && S.user.email && S.user.email.toLowerCase() === "rosie@acegroupny.com");
+}
 function syncNav(){
   document.getElementById("nav-out").hidden = !!S.user;
   document.getElementById("nav-in").hidden = !S.user;
   if(S.user) document.getElementById("nav-name").textContent = S.user.name;
+  var oz = document.getElementById("ownerZone");
+  if(oz) oz.hidden = !isOwner();
 }
 
 /* ============ modal ============ */
@@ -969,8 +977,8 @@ function authModal(mode, after){
       ? "Free access to The 5-Day Feed Reset, and anything you buy later lands in the same place."
       : "Log in to pick up where you left off.") + '</p></div>' +
     '<div class="mbody">' +
-      (isSignup ? '<div style="display:flex;gap:10px"><div style="flex:1"><label for="f-name">First name</label><input id="f-name" type="text" placeholder="Rosie" autocomplete="given-name"></div><div style="flex:1"><label for="f-last">Last name</label><input id="f-last" type="text" placeholder="Ben-Abou" autocomplete="family-name"></div></div>' : '') +
-      '<div><label for="f-email">Email</label><input id="f-email" type="email" placeholder="you@yourbusiness.com" autocomplete="email"></div>' +
+      (isSignup ? '<div style="display:flex;gap:10px"><div style="flex:1"><label for="f-name">First name</label><input id="f-name" type="text" autocomplete="given-name"></div><div style="flex:1"><label for="f-last">Last name</label><input id="f-last" type="text" autocomplete="family-name"></div></div>' : '') +
+      '<div><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email"></div>' +
       '<div><label for="f-pw">' + (isSignup ? 'Create a password' : 'Password') + '</label><input id="f-pw" type="password" placeholder="' + (isSignup ? 'At least 6 characters' : 'Your password') + '" autocomplete="' + (isSignup ? 'new-password' : 'current-password') + '"></div>' +
       (isSignup ? '<div><label for="f-ig">Instagram</label><input id="f-ig" type="text" placeholder="@yourhandle"></div>' : '') +
       (isSignup ? '<div><label for="f-heard">How did you hear about us?</label><select id="f-heard"><option value="">Choose one</option><option>Instagram</option><option>Word of mouth</option><option>Google search</option><option>I am an Ace Group client</option><option>Other</option></select></div>' : '') +
