@@ -1393,17 +1393,12 @@ function renderAccount(){
     '<h2 style="font-size:19px;margin-bottom:12px">Purchases</h2>' +
     '<div class="tablewrap"><table><thead><tr><th>Item</th><th>Paid</th><th>Date</th><th></th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
     '<p class="muted" style="font-size:13px;margin-top:16px">Email rosie@acegroupny.com with any questions.</p>' +
-    (isOwner() ? '<button class="btn ghost sm" id="reset-demo" style="margin-top:22px">Reset this demo</button>' : '');
+    '';
 
   v.querySelectorAll("[data-receipt]").forEach(function(b){
     b.addEventListener("click", function(){ toast("Demo only. The live portal emails the Stripe receipt for " + b.dataset.receipt + "."); });
   });
-  var rd = v.querySelector("#reset-demo");
-  if(rd) rd.addEventListener("click", function(){
-    S = { user:null, owned:["reset"], done:{} };
-    activeLesson = {}; save(); syncNav(); show("landing");
-    toast("Demo reset. You are back to a fresh visitor.");
-  });
+
 }
 
 /* ============ admin ============ */
