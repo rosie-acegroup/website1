@@ -495,7 +495,7 @@ tr:last-child td{border-bottom:0}
 .modal .msub{color:var(--muted);font-size:14px;margin-top:8px}
 .modal .mbody{padding:20px 24px 24px;display:flex;flex-direction:column;gap:13px}
 label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
-input[type=text],input[type=email]{
+input[type=text],input[type=email],select{
   width:100%;padding:10px 12px;border-radius:9px;border:1px solid var(--line);
   background:var(--paper-2);color:var(--text);font:inherit;font-size:14px;
 }
@@ -969,28 +969,35 @@ function authModal(mode, after){
       ? "Free access to The 5-Day Feed Reset, and anything you buy later lands in the same place."
       : "Log in to pick up where you left off.") + '</p></div>' +
     '<div class="mbody">' +
-      (isSignup ? '<div><label for="f-name">Your name</label><input id="f-name" type="text" placeholder="Rosie Ben-Abou" autocomplete="name"></div>' : '') +
+      (isSignup ? '<div style="display:flex;gap:10px"><div style="flex:1"><label for="f-name">First name</label><input id="f-name" type="text" placeholder="Rosie" autocomplete="given-name"></div><div style="flex:1"><label for="f-last">Last name</label><input id="f-last" type="text" placeholder="Ben-Abou" autocomplete="family-name"></div></div>' : '') +
       '<div><label for="f-email">Email</label><input id="f-email" type="email" placeholder="you@yourbusiness.com" autocomplete="email"></div>' +
-      (isSignup ? '<div><label for="f-biz">Business (optional)</label><input id="f-biz" type="text" placeholder="What you run"></div>' : '') +
+      (isSignup ? '<div><label for="f-ig">Instagram</label><input id="f-ig" type="text" placeholder="@yourhandle"></div>' : '') +
+      (isSignup ? '<div><label for="f-heard">How did you hear about us?</label><select id="f-heard"><option value="">Choose one</option><option>Instagram</option><option>Word of mouth</option><option>Google search</option><option>I am an Ace Group client</option><option>Other</option></select></div>' : '') +
+      (isSignup ? '<div><label for="f-focus">What are you most looking to work on?</label><input id="f-focus" type="text" placeholder="Social media, email, filming..."></div>' : '') +
       '<button class="btn block lg" id="f-go">' + (isSignup ? "Create account and start" : "Log in") + '</button>' +
       '<p class="swap">' + (isSignup ? 'Already have an account? <button id="f-swap">Log in</button>' : 'New here? <button id="f-swap">Create one</button>') + '</p>' +
-      '<p class="muted" style="font-size:12px;text-align:center">Demo login. Nothing is sent anywhere and any email works.</p>' +
+      '<p class="muted" style="font-size:12px;text-align:center">No password needed. Your progress is saved on this device.</p>' +
     '</div>'
   );
   document.getElementById("f-swap").addEventListener("click", function(){ authModal(isSignup ? "login" : "signup", after); });
   document.getElementById("f-go").addEventListener("click", function(){
     var email = document.getElementById("f-email").value.trim();
-    var name = isSignup ? document.getElementById("f-name").value.trim() : (S.user && S.user.name);
-    var biz = isSignup ? document.getElementById("f-biz").value.trim() : (S.user && S.user.biz);
+    var first = isSignup ? document.getElementById("f-name").value.trim() : "";
+    var last = isSignup ? document.getElementById("f-last").value.trim() : "";
+    var ig = isSignup ? document.getElementById("f-ig").value.trim() : "";
+    var heard = isSignup ? document.getElementById("f-heard").value : "";
+    var focus = isSignup ? document.getElementById("f-focus").value.trim() : "";
     if(!email || email.indexOf("@") < 1){ toast("Enter an email address so we can create your login."); return; }
-    S.user = { name: name || email.split("@")[0], email: email, biz: biz || "", joined: new Date().toISOString().slice(0,10) };
+    if(isSignup && !first){ toast("Add your first name so we know what to call you."); return; }
+    var name = isSignup ? (first + " " + last).trim() : ((S.user && S.user.name) || email.split("@")[0]);
+    S.user = { name: name || email.split("@")[0], first: first, last: last, email: email, instagram: ig, heard: heard, focus: focus, joined: new Date().toISOString().slice(0,10) };
     if(!owns("reset")) S.owned.push("reset");
     save(); syncNav(); closeModal();
     if(isSignup && CONFIG.crmLead){
       try{
         fetch(CONFIG.crmLead, { method:"POST", keepalive:true,
           headers:{ "content-type":"text/plain" },
-          body: JSON.stringify({ name:S.user.name, email:S.user.email, business:S.user.biz, source:"Ace It academy" }) });
+          body: JSON.stringify({ name:S.user.name, email:S.user.email, instagram:S.user.instagram, heard:S.user.heard, focus:S.user.focus, source:"Ace It academy" }) });
       }catch(_){ }
     }
     toast(isSignup ? "Account created. The free course is unlocked." : "Logged in.");
@@ -1328,7 +1335,8 @@ function renderAccount(){
     '<div class="card pad" style="margin-bottom:22px"><dl class="kv">' +
       '<dt>Name</dt><dd>' + esc(S.user.name) + '</dd>' +
       '<dt>Email</dt><dd>' + esc(S.user.email) + '</dd>' +
-      '<dt>Business</dt><dd>' + (S.user.biz ? esc(S.user.biz) : '<span class="muted">Not set</span>') + '</dd>' +
+      '<dt>Instagram</dt><dd>' + (S.user.instagram ? esc(S.user.instagram) : '<span class="muted">Not set</span>') + '</dd>' +
+      '<dt>Working on</dt><dd>' + (S.user.focus ? esc(S.user.focus) : '<span class="muted">Not set</span>') + '</dd>' +
       '<dt>Member since</dt><dd class="tabnum">' + esc(S.user.joined) + '</dd>' +
       '<dt>Membership</dt><dd>' + (S.member ? "Template Vault, active" : '<span class="muted">Not subscribed</span>') + '</dd>' +
     '</dl></div>' +
