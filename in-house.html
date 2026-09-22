@@ -364,11 +364,11 @@ nav{line-height:1.7;}
 .footer .sw{width:20px;height:20px;border-radius:4px;border:1px solid rgba(245,247,240,.28)}
 
 /* ---------- app shell ---------- */
-.shell{display:grid;grid-template-columns:216px 1fr;gap:34px;max-width:1180px;margin:0 auto;padding:26px 20px 60px;align-items:start}
+.shell{display:grid;grid-template-columns:216px 1fr;gap:34px;max-width:1180px;margin:89px auto 0;padding:26px 20px 60px;align-items:start}
 .rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 78px);display:flex;flex-direction:column;gap:2px}
 .rail button{
   display:flex;align-items:center;gap:10px;width:100%;text-align:left;
-  padding:9px 12px;border-radius:8px;font-size:14px;color:var(--muted);font-weight:500;
+  padding:9px 12px;border-radius:8px;font-size:14px;color:var(--muted);font-weight:500;white-space:nowrap;
 }
 .rail button:hover{background:var(--paper);color:var(--text)}
 .rail button[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
@@ -626,17 +626,6 @@ input::placeholder{color:var(--muted);opacity:.7}
   </div>
 </nav>
 
-<div class="acebar">
-  <div class="acebar-in">
-    <button class="acebar-brand" id="logo">Ace It</button>
-    <span class="acebar-note">The academy by Ace Group</span>
-    <div class="spacer"></div>
-    <div id="nav-in" hidden style="display:flex;align-items:center;gap:12px">
-      <span class="muted" style="font-size:13px" id="nav-name"></span>
-      <button class="btn ghost sm" id="nav-logout">Log out</button>
-    </div>
-  </div>
-</div>
 
 <main>
 <!-- ====================== LANDING ====================== -->
@@ -725,6 +714,36 @@ input::placeholder{color:var(--muted);opacity:.7}
 </section>
 
 
+
+<!-- ====================== APP ====================== -->
+<div id="shell" class="shell" hidden>
+  <nav class="rail">
+    <div class="cap eyebrow" id="logo">Your account</div>
+    <button data-go="dashboard">My courses</button>
+    <button data-go="catalog">Browse library</button>
+    <button data-go="agency">Work with Ace</button>
+    <button data-go="account">Account</button>
+    <div class="sep"></div>
+    <div class="cap eyebrow">Owner</div>
+    <button data-go="admin">Admin</button>
+    <div class="sep"></div>
+    <div id="nav-in" hidden style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:4px 12px">
+      <span class="muted" style="font-size:13px" id="nav-name"></span>
+      <button class="btn ghost sm" id="nav-logout">Log out</button>
+    </div>
+  </nav>
+
+  <div>
+    <section id="view-dashboard" class="view" hidden></section>
+    <section id="view-course" class="view" hidden></section>
+    <section id="view-catalog" class="view" hidden></section>
+    <section id="view-agency" class="view" hidden></section>
+    <section id="view-account" class="view" hidden></section>
+    <section id="view-admin" class="view" hidden></section>
+  </div>
+</div>
+</main>
+
 <footer>
   <div class="footer-top">
     <div>
@@ -763,29 +782,6 @@ input::placeholder{color:var(--muted);opacity:.7}
   </div>
 </footer>
 
-<!-- ====================== APP ====================== -->
-<div id="shell" class="shell" hidden>
-  <nav class="rail">
-    <div class="cap eyebrow">Your account</div>
-    <button data-go="dashboard">My courses</button>
-    <button data-go="catalog">Browse library</button>
-    <button data-go="agency">Work with Ace</button>
-    <button data-go="account">Account</button>
-    <div class="sep"></div>
-    <div class="cap eyebrow">Owner</div>
-    <button data-go="admin">Admin</button>
-  </nav>
-
-  <div>
-    <section id="view-dashboard" class="view" hidden></section>
-    <section id="view-course" class="view" hidden></section>
-    <section id="view-catalog" class="view" hidden></section>
-    <section id="view-agency" class="view" hidden></section>
-    <section id="view-account" class="view" hidden></section>
-    <section id="view-admin" class="view" hidden></section>
-  </div>
-</div>
-</main>
 
 <div id="modal-root"></div>
 <div id="toast" role="status" aria-live="polite"></div>
