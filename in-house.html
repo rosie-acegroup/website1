@@ -101,20 +101,20 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 h1,h2,h3,h4,.display{
-  font-family:var(--font-display);
-  font-variation-settings:"wdth" 118,"wght" 700;
-  letter-spacing:-.018em;
+  font-family:var(--font-head);
+  font-weight:400;
+  letter-spacing:0;
   text-wrap:balance;
   margin:0;
-  line-height:1.1;
+  line-height:1.12;
 }
 p{margin:0}
 a{color:inherit}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 .eyebrow{
-  font-family:var(--font-display);
-  font-variation-settings:"wdth" 108,"wght" 600;
+  font-family:var(--font-body);
+  font-weight:600;
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
   display:inline-flex;align-items:center;gap:9px;
 }
@@ -196,7 +196,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .daylist li{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
 .daylist li:last-child{border-bottom:0}
 .daylist .n{
-  font-family:var(--font-display);font-variation-settings:"wdth" 112,"wght" 700;
+  font-family:var(--font-body);font-weight:700;
   font-size:12px;color:var(--accent);flex:none;width:46px;letter-spacing:.06em;white-space:nowrap;
 }
 .daylist .t{font-size:14px;flex:1}
@@ -210,7 +210,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .point h3{font-size:17px;margin-bottom:8px}
 .point p{font-size:14px;color:var(--muted)}
 .point .mark{
-  font-family:var(--font-display);font-variation-settings:"wdth" 118,"wght" 700;
+  font-family:var(--font-body);font-weight:700;
   color:var(--rose);font-size:13px;letter-spacing:.1em;display:block;margin-bottom:10px;
 }
 
@@ -348,7 +348,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .toc .modhead{
   padding:12px 16px 6px;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
-  font-family:var(--font-display);font-variation-settings:"wdth" 108,"wght" 600;
+  font-family:var(--font-body);font-weight:600;
 }
 .toc button{
   display:flex;gap:11px;width:100%;text-align:left;padding:10px 16px;align-items:flex-start;
@@ -510,9 +510,9 @@ input::placeholder{color:var(--muted);opacity:.7}
   <div class="wrap hero">
     <div class="hero-grid">
       <div>
-        <span class="pill"><span class="dot"></span>Ace It on your own</span>
+        <span class="pill"><span class="dot"></span>Free course now available</span>
         <h1 style="margin-top:18px">No more guessing. Run your own marketing properly.</h1>
-        <p class="lede">Ace It is the academy we built for owners doing this themselves. We teach the filming, writing, batching, sending, and the weekly rhythm that keeps it going. The strategy work stays at the agency, and we will tell you plainly when you have reached it.</p>
+        <p class="lede">Ace It is the academy we built for you when you want to do the small projects on your own. We teach the filming, writing, batching, sending, and the weekly rhythm that keeps it going. The strategy work stays at the agency, and we will tell you plainly when you have reached it.</p>
         <div class="cta-row">
           <button class="btn lg" id="hero-cta">Start the free 5-day reset</button>
         </div>
