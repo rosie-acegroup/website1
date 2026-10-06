@@ -167,8 +167,10 @@ hr{border:none;border-top:1px solid rgba(102,47,71,0.12);margin:0 3.5rem;}
 /* BRANDS */
 .brands-section{padding:5rem 0;overflow:hidden;border-top:1px solid rgba(102,47,71,0.12);border-bottom:1px solid rgba(102,47,71,0.12);}
 .brands-lbl{font-family:var(--p);font-weight:500;font-size:12px;letter-spacing:0.45em;text-transform:uppercase;color:var(--plum);text-align:center;margin-bottom:3rem;}
-.brands-track{display:flex;gap:3.5rem;animation:marquee 35s linear infinite;width:max-content;}
-.brand-name{font-family:var(--f);font-weight:700;font-style:italic;font-size:22px;color:rgba(102,47,71,0.35);white-space:nowrap;transition:color 0.3s;cursor:default;}
+.brands-track{display:flex;gap:3rem;align-items:center;animation:marquee 35s linear infinite;width:max-content;}
+.tick-sq{display:flex;align-items:center;color:var(--mauve);opacity:.7;}
+.tick-sq svg{width:44px;height:14px;}
+.brand-name{font-family:var(--f);font-weight:700;font-style:italic;font-size:24px;color:rgba(102,47,71,0.6);white-space:nowrap;transition:color 0.3s;cursor:default;}
 .brand-name:hover{color:var(--plum);}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -469,6 +471,32 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
   </div>
 </section>
 
+
+<!-- INTRO STATEMENT -->
+<style>
+/* intro statement */
+.intro-state{background:var(--cream);padding:6.5rem 3.5rem;}
+.intro-state-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.25fr;gap:4rem;align-items:center;}
+.is-headline{font-family:var(--f);font-weight:700;font-style:italic;font-size:clamp(40px,5vw,66px);line-height:1.02;color:var(--plum);text-align:center;margin:0;}
+.is-headline em{color:var(--black);}
+.is-right{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2.4rem;}
+.is-right p{font-family:var(--p);font-weight:300;font-size:clamp(16px,1.5vw,19px);line-height:1.85;color:rgba(22,21,17,0.82);margin:0;max-width:34em;}
+.is-btn{display:inline-block;padding:1.05rem 2.6rem;background:var(--plum);color:#fffef8;border-radius:999px;font-family:var(--p);font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;text-decoration:none;transition:background .3s,transform .3s;}
+.is-btn:hover{background:#4a2033;transform:translateY(-2px);}
+.is-squiggle{width:130px;height:18px;color:var(--plum);}
+@media(max-width:820px){.intro-state{padding:4rem 1.5rem;}.intro-state-grid{grid-template-columns:1fr;gap:2.4rem;}}
+</style>
+<section class="intro-state">
+  <div class="intro-state-grid">
+    <h2 class="is-headline">Bold to break<br><em>the mold.</em></h2>
+    <div class="is-right">
+      <p>The Ace Group NY is a Brooklyn based creative agency specializing in live activations, pop ups, event production, and the branding and content behind them. We help brands and organizations turn who they are into experiences people show up for, talk about, and remember.</p>
+      <a href="work.html" class="is-btn">Projects</a>
+      <svg class="is-squiggle" viewBox="0 0 160 20" fill="none" aria-hidden="true"><path d="M4 10 Q 14 1, 24 10 T 44 10 T 64 10 T 84 10 T 104 10 T 124 10 T 144 10 T 156 10" style="stroke:#662f47!important;stroke-width:3.2;fill:none" stroke-linecap="round"/></svg>
+    </div>
+  </div>
+</section>
+
 <!-- SNEAK PEEK -->
 <style>
 .peek{background:var(--paper);padding:6rem 3rem 5rem;text-align:center;overflow:hidden;}
@@ -503,47 +531,10 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
 
 <!-- BRANDS -->
 <section id="work" class="brands-section">
-  <p class="brands-lbl reveal">Brands We've Partnered With</p>
+  <p class="brands-lbl reveal">The Services We Offer</p>
   <div style="overflow:hidden">
     <div class="brands-track">
-      <span class="brand-name">Koshertown</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Bonei Olam Chabad</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Sewlip</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Factory Direct Party</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Chabad at Yale</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Yalla IU</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Yalla Merch Supplier</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Reflection Theory</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Human and Holy</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Messooder</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Sur la Mur</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Chabad.org</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Aurelia</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Pop Up Bakeshoppe</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Zcore</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">PJECC</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Karne</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Kosh Midtown</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Chai Cafe</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Koshertown</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Bonei Olam Chabad</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Sewlip</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Factory Direct Party</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Chabad at Yale</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Yalla IU</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Yalla Merch Supplier</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Reflection Theory</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Human and Holy</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Messooder</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Sur la Mur</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Chabad.org</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Aurelia</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Pop Up Bakeshoppe</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Zcore</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">PJECC</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Karne</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Kosh Midtown</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
-      <span class="brand-name">Chai Cafe</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
+      <span class="brand-name">Live Activations</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Pop Ups</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Events</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Guerrilla Marketing</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Logos &amp; Branding</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Content</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Social Media</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Photography</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Websites</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Strategy</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Live Activations</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Pop Ups</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Events</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Guerrilla Marketing</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Logos &amp; Branding</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Content</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Social Media</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Photography</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Websites</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span><span class="brand-name">Strategy</span><span class="tick-sq" aria-hidden="true"><svg viewBox="0 0 44 14" fill="none"><path d="M3 7 Q 8.5 1, 14 7 T 25 7 T 36 7 T 41 7" style="stroke:#dba0b2!important;stroke-width:2.6;fill:none" stroke-linecap="round"/></svg></span>
     </div>
   </div>
 </section>
