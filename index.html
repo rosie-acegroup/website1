@@ -111,7 +111,9 @@ nav.scrolled{padding:1rem 3.5rem;}
   position:relative;overflow:hidden;
   background:var(--paper);
 }
-.hero > *:not(.hero-bg-img):not(.hero-overlay) { position: relative; z-index: 2; }
+.hero > *:not(.hero-bg-img):not(.hero-overlay):not(.hero-video) { position: relative; z-index: 2; }
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.hero-statement{font-size:clamp(28px,3.8vw,50px)!important;line-height:1.3!important;max-width:940px;margin-left:auto;margin-right:auto;}
 .hero-tag{font-family:var(--p);font-weight:400;font-size:13px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(22,21,17,0.6);margin-bottom:1.2rem;opacity:0;animation:up 0.8s ease 0.2s forwards;}
 .hero-h1{font-family:var(--f);font-weight:700;font-style:italic;font-size:clamp(40px,8vw,72px);line-height:0.95;color:var(--cream);max-width:860px;margin-bottom:2rem;opacity:0;animation:up 1s ease 0.4s forwards;}
 .hero-h1 em{color:#f0b8cc;font-style:italic;}
@@ -462,10 +464,9 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg-img" id="heroBg"></div>
+  <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="hero-overlay"></div>
-  <p class="hero-tag">Founder-led creative agency</p>
-  <h1 class="hero-h1">Building your Business<br><em>to be your Legacy.</em></h1>
-  <p class="hero-sub">Making bold moves to break away from expectation.</p>
+  <h1 class="hero-h1 hero-statement">Brand, concept and experiential strategy for <em>community-driven</em> businesses and organizations.</h1>
   <div class="hero-btns">
     <a href="https://calendly.com/theacegroupny/brand-discovery" target="_blank" class="btn-dark">Book a Discovery Call</a>
   </div>
@@ -529,7 +530,7 @@ footer{background:var(--black);padding:4rem 3.5rem 2.5rem;width:100%;margin:0;}
 
 <!-- BRANDS -->
 <section id="work" class="brands-section">
-  <p class="brands-lbl reveal">The Services We Offer</p>
+  <p class="brands-lbl reveal">What We Do</p>
   <div style="overflow:hidden">
     <div class="brands-track">
       <span class="brand-name">Live Activations</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Pop Ups</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Events</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Guerrilla Marketing</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Logos &amp; Branding</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Content</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Social Media</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Photography</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Websites</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Strategy</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Live Activations</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Pop Ups</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Events</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Guerrilla Marketing</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Logos &amp; Branding</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Content</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Social Media</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Photography</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Websites</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span><span class="brand-name">Strategy</span><span class="brand-name" style="color:var(--mauve);opacity:.5">✦</span>
@@ -902,6 +903,21 @@ function setS(v){if(inp){inp.value=v;inp.focus();renderS(v);}}
   if(!t||!m)return;
   t.addEventListener('click',function(){t.classList.toggle('open');m.classList.toggle('open');});
   m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){t.classList.remove('open');m.classList.remove('open');});});
+})();
+</script>
+<script>
+var HERO_VIDEOS = []; /* add clips here, e.g. ["hero-clip-1.mp4","hero-clip-2.mp4"] */
+(function(){
+  var v=document.getElementById('heroVideo');
+  if(!v) return;
+  if(!HERO_VIDEOS.length){ v.remove(); return; }
+  var i=0; v.src=HERO_VIDEOS[0];
+  if(HERO_VIDEOS.length>1){
+    v.loop=false;
+    v.addEventListener('ended',function(){ i=(i+1)%HERO_VIDEOS.length; v.src=HERO_VIDEOS[i]; v.play().catch(function(){}); });
+  }
+  v.addEventListener('error',function(){ v.remove(); });
+  var p=v.play(); if(p&&p.catch) p.catch(function(){});
 })();
 </script>
 </body>
