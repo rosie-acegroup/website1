@@ -20,6 +20,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
       <a href="#programs">Programs</a>
       <a href="#philosophy">Philosophy</a>
       <a href="#visit">Visit</a>
+      <a href="#faq">FAQ</a>
     </nav>
     <div class="nav__right">
       <a class="btn btn--sm" href="#enroll">Schedule a Tour</a>
@@ -41,7 +42,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 
   <div class="hero__inner">
     <img class="hero__tree" src="<?php echo $asset; ?>/img/tree-submark.png" alt="">
-    <p class="eyebrow">Pacific Palisades &amp; Santa Monica &middot; Infants–TK</p>
+    <p class="eyebrow">Pacific Palisades &amp; the Westside &middot; Infants–TK</p>
     <h1 class="hero__title">We're Home.<br>And So <em>Are You.</em></h1>
     <p class="hero__lead">A warm, nature-inspired Jewish early childhood community where every child is known, every family belongs, and childhood is celebrated in all the ways that matter most.</p>
     <div class="hero__cta">
@@ -223,6 +224,70 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
     <div class="quote reveal">
       <p>It's the school where kids actually love going. They learn so much, but it never feels like pressure — it feels like joy. And the community? It's like family.</p>
       <cite>A PJECC Parent</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section__head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
+      <p class="eyebrow">Good to Know</p>
+      <h2 class="section-title">Frequently Asked<br>Questions.</h2>
+    </div>
+    <div class="faq reveal">
+      <details class="faq__item" open>
+        <summary>What are your hours and schedule options?</summary>
+        <div class="faq__a">
+          <p>We offer flexible scheduling to fit your family:</p>
+          <ul>
+            <li><strong>Half day</strong> — 9:00 AM–12:30 PM</li>
+            <li><strong>Full day</strong> — 9:00 AM–3:00 PM</li>
+            <li><strong>Extended care</strong> — 7:30–9:00 AM &amp; 3:00–5:30 PM</li>
+          </ul>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary>What ages do you serve?</summary>
+        <div class="faq__a">
+          <p>We welcome children from infancy through TK (about 0–5 years), across five age groups — our Chaverim classes:</p>
+          <ul>
+            <li><strong>Chaverim Alef</strong> — Infant Center</li>
+            <li><strong>Chaverim Bet</strong> — Toddlers</li>
+            <li><strong>Chaverim Gimmel</strong> — 2-Year-Olds</li>
+            <li><strong>Chaverim Daled</strong> — 3-Year-Olds</li>
+            <li><strong>Chaverim Hey</strong> — 4-Year-Olds / TK</li>
+          </ul>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary>Where are your two campuses?</summary>
+        <div class="faq__a">
+          <p>We have two coastal locations:</p>
+          <ul>
+            <li><strong>Palisades Campus</strong> — [add street address], Pacific Palisades, CA 90272</li>
+            <li><strong>Westside Campus</strong> — [add street address], Santa Monica, CA 90403</li>
+          </ul>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary>Do we have to be Jewish to attend?</summary>
+        <div class="faq__a">
+          <p>Not at all — PJECC is open to families of all backgrounds. What unites our families is the desire to raise thoughtful, confident children who feel loved, respected, and connected. Jewish values are woven naturally into each day, nurturing kindness, respect, and belonging for every child.</p>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary>What is your educational approach?</summary>
+        <div class="faq__a">
+          <p>We're a Reggio-inspired, play-based program — one of the few outdoor Jewish preschools by the coast. Children learn through play, nature, art, and hands-on discovery in small classes with low student-to-teacher ratios, guided by specialists in early childhood development. We honor childhood rather than rush it.</p>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary>How do I apply or schedule a tour?</summary>
+        <div class="faq__a">
+          <p>The best first step is to come see us. <a href="#enroll" style="color:var(--blue);font-weight:700;">Schedule a tour</a> using the form below, or reach out at <a href="mailto:hello@pjecc.org" style="color:var(--blue);font-weight:700;">hello@pjecc.org</a>. We're now enrolling for the 2026–2027 school year at both campuses.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
