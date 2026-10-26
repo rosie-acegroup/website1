@@ -233,6 +233,9 @@ h2.section-title{font-size:clamp(38px,6.5vw,74px);margin-bottom:0.5rem;}
 .campus__body{padding:1.8rem 1.8rem 2rem;}
 .campus h3{font-size:32px;margin-bottom:.5rem;}
 .campus p{color:var(--ink-soft);font-size:16.5px;margin-bottom:1rem;}
+.campus__addr{margin:-.3rem 0 1rem;font-size:14.5px;font-weight:700;letter-spacing:.01em;}
+.campus__addr a{color:var(--blue);}
+.campus__addr a:hover{color:var(--green);text-decoration:underline;}
 .campus a.link{font-family:var(--f-body);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:var(--blue);display:inline-flex;align-items:center;gap:.4rem;}
 .campus a.link:hover{gap:.7rem;color:var(--green);}
 
