@@ -42,7 +42,6 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 
   <div class="hero__inner">
     <img class="hero__tree" src="<?php echo $asset; ?>/img/tree-submark.png" alt="">
-    <p class="eyebrow">Pacific Palisades &amp; the Westside &middot; Infants–TK</p>
     <h1 class="hero__title">We're Home.<br>And So <em>Are You.</em></h1>
     <p class="hero__lead">A warm, nature-inspired Jewish early childhood community where every child is known, every family belongs, and childhood is celebrated in all the ways that matter most.</p>
     <div class="hero__cta">
