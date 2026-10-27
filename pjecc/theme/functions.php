@@ -63,3 +63,57 @@ function pjecc_resource_hints( $urls, $relation_type ) {
 	return $urls;
 }
 add_filter( 'wp_resource_hints', 'pjecc_resource_hints', 10, 2 );
+
+/**
+ * Tour-request form handler.
+ * Emails every submission to the school. No form plugin required.
+ *
+ * Change the recipient here (or override with the 'pjecc_tour_recipient' filter).
+ */
+function pjecc_tour_recipient() {
+	return apply_filters( 'pjecc_tour_recipient', 'hello@pjecc.org' );
+}
+
+function pjecc_handle_tour() {
+	// Spam honeypot: real people never fill this.
+	if ( ! empty( $_POST['website'] ) ) {
+		wp_safe_redirect( add_query_arg( 'tour', 'sent', wp_get_referer() ?: home_url( '/' ) ) . '#enroll' );
+		exit;
+	}
+
+	// Security: verify the nonce.
+	if ( ! isset( $_POST['pjecc_nonce'] ) || ! wp_verify_nonce( $_POST['pjecc_nonce'], 'pjecc_tour' ) ) {
+		wp_die( esc_html__( 'Sorry, your security token expired. Please go back and submit the form again.', 'pjecc' ) );
+	}
+
+	$name   = sanitize_text_field( wp_unslash( $_POST['pname'] ?? '' ) );
+	$email  = sanitize_email( wp_unslash( $_POST['pemail'] ?? '' ) );
+	$phone  = sanitize_text_field( wp_unslash( $_POST['pphone'] ?? '' ) );
+	$campus = sanitize_text_field( wp_unslash( $_POST['pcampus'] ?? '' ) );
+	$child  = sanitize_text_field( wp_unslash( $_POST['pchild'] ?? '' ) );
+	$msg    = sanitize_textarea_field( wp_unslash( $_POST['pmsg'] ?? '' ) );
+
+	$to      = pjecc_tour_recipient();
+	$subject = 'New Tour Request from the PJECC website' . ( $name ? ' — ' . $name : '' );
+
+	$body  = "A new tour request came in from the PJECC website:\n\n";
+	$body .= 'Name: ' . $name . "\n";
+	$body .= 'Email: ' . $email . "\n";
+	$body .= 'Phone: ' . $phone . "\n";
+	$body .= 'Location of interest: ' . $campus . "\n";
+	$body .= "Child's age: " . $child . "\n\n";
+	$body .= "Message:\n" . ( $msg !== '' ? $msg : '(none)' ) . "\n";
+
+	$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+	if ( $email && is_email( $email ) ) {
+		$headers[] = 'Reply-To: ' . ( $name ? $name . ' ' : '' ) . '<' . $email . '>';
+	}
+
+	wp_mail( $to, $subject, $body, $headers );
+
+	$redirect = wp_get_referer() ? wp_get_referer() : home_url( '/' );
+	wp_safe_redirect( add_query_arg( 'tour', 'sent', $redirect ) . '#enroll' );
+	exit;
+}
+add_action( 'admin_post_pjecc_tour', 'pjecc_handle_tour' );
+add_action( 'admin_post_nopriv_pjecc_tour', 'pjecc_handle_tour' );

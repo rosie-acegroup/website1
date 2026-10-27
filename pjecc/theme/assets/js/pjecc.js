@@ -46,14 +46,20 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* Demo form guard (replace with a real form plugin in WordPress) */
+  /* Form: in the static preview (no real action) show a thank-you without
+     navigating. On WordPress the form has a real action and submits normally
+     (handled server-side in functions.php). */
   var form = document.getElementById('tour-form');
   if (form) {
     form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var note = form.querySelector('.form-note');
-      if (note) note.hidden = false;
-      form.reset();
+      var action = form.getAttribute('action') || '';
+      if (action === '' || action === '#') {
+        ev.preventDefault();
+        var note = form.querySelector('.form-note--js');
+        if (note) note.hidden = false;
+        form.reset();
+      }
+      /* otherwise: let WordPress handle the real submission */
     });
   }
 })();

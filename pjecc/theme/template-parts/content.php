@@ -317,7 +317,14 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
         </ul>
       </div>
       <div class="form-card reveal">
-        <form id="tour-form" novalidate>
+        <form id="tour-form" method="post" action="<?php echo function_exists( 'admin_url' ) ? esc_url( admin_url( 'admin-post.php' ) ) : '#'; ?>">
+          <input type="hidden" name="action" value="pjecc_tour">
+          <?php if ( function_exists( 'wp_nonce_field' ) ) { wp_nonce_field( 'pjecc_tour', 'pjecc_nonce' ); } ?>
+          <!-- Honeypot: hidden from people, bots fill it and get dropped -->
+          <div class="field pjecc-hp" aria-hidden="true">
+            <label for="website">Leave this field empty</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
           <div class="field">
             <label for="pname">Parent / Guardian Name</label>
             <input id="pname" name="pname" type="text" autocomplete="name" required>
@@ -353,7 +360,10 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
             <textarea id="pmsg" name="pmsg" rows="3"></textarea>
           </div>
           <button class="btn" type="submit" style="width:100%;justify-content:center;">Request a Tour</button>
-          <p class="form-note" hidden style="margin-top:1rem;color:var(--green);font-weight:700;">Thank you! We'll be in touch soon. 🌳</p>
+<?php if ( ! empty( $_GET['tour'] ) && 'sent' === $_GET['tour'] ) : ?>
+          <p class="form-note" style="margin-top:1rem;color:var(--green);font-weight:700;">Thank you! Your request is on its way, we'll be in touch soon. 🌳</p>
+<?php endif; ?>
+          <p class="form-note form-note--js" hidden style="margin-top:1rem;color:var(--green);font-weight:700;">Thank you! We'll be in touch soon. 🌳</p>
         </form>
       </div>
     </div>
