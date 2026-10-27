@@ -292,6 +292,21 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
   </div>
 </section>
 
+<!-- ============================ CTA BAND ============================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="cta reveal">
+      <p class="eyebrow" style="color:var(--yellow);">Join Us This Fall</p>
+      <h2>Where Your Child's<br>Story Begins.</h2>
+      <p>PJECC is growing, and we'd love for you to be part of it from the very beginning.</p>
+      <div class="cta__btns">
+        <a class="btn btn--light" href="#enroll">Schedule a Tour</a>
+        <a class="btn btn--ghost" style="color:var(--cream);border-color:var(--cream);" href="#enroll">Enroll for 2026–2027</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============================ ENROLL / VISIT FORM ============================ -->
 <section class="section" id="enroll">
   <div class="wrap">
@@ -363,21 +378,6 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 <?php endif; ?>
           <p class="form-note form-note--js" hidden style="margin-top:1rem;color:var(--green);font-weight:700;">Thank you! We'll be in touch soon. 🌳</p>
         </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ CTA BAND ============================ -->
-<section class="section">
-  <div class="wrap">
-    <div class="cta reveal">
-      <p class="eyebrow" style="color:var(--yellow);">Join Us This Fall</p>
-      <h2>Where Your Child's<br>Story Begins.</h2>
-      <p>PJECC is growing, and we'd love for you to be part of it from the very beginning.</p>
-      <div class="cta__btns">
-        <a class="btn btn--light" href="#enroll">Schedule a Tour</a>
-        <a class="btn btn--ghost" style="color:var(--cream);border-color:var(--cream);" href="#enroll">Enroll for 2026–2027</a>
       </div>
     </div>
   </div>
