@@ -7,6 +7,12 @@
  * Expects $asset — the base URL for /assets (no trailing slash).
  */
 if ( ! isset( $asset ) ) { $asset = 'assets'; }
+// Cache-bust photos by file-modification time so replaced images show right away.
+$img_dir = __DIR__ . '/../assets/img';
+$ver = function ( $file ) use ( $img_dir ) {
+	$p = $img_dir . '/' . $file;
+	return file_exists( $p ) ? '?v=' . filemtime( $p ) : '';
+};
 ?>
 <!-- ============================ NAV ============================ -->
 <header class="nav" id="site-nav">
@@ -76,7 +82,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
         <p>Through it all, our purpose has stayed the same: to create a place where every child is known, every family feels welcome, and childhood is celebrated in all the ways that matter most.</p>
       </div>
       <div class="media media--tall reveal">
-        <img src="<?php echo $asset; ?>/img/about.jpg" alt="Children exploring nature materials together at PJECC">
+        <img src="<?php echo $asset; ?>/img/about.jpg<?php echo $ver('about.jpg'); ?>" alt="Children exploring nature materials together at PJECC">
       </div>
     </div>
   </div>
@@ -171,7 +177,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
   <div class="wrap">
     <div class="philosophy__grid">
       <div class="media philosophy__photo reveal">
-        <img src="<?php echo $asset; ?>/img/philosophy.jpg" alt="Children creating together at PJECC">
+        <img src="<?php echo $asset; ?>/img/philosophy.jpg<?php echo $ver('philosophy.jpg'); ?>" alt="Children creating together at PJECC">
       </div>
       <div class="philosophy reveal">
         <p class="eyebrow">Our Philosophy</p>
