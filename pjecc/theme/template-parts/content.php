@@ -285,7 +285,7 @@ $ver = function ( $file ) use ( $img_dir ) {
       <details class="faq__item">
         <summary>How do I apply or schedule a tour?</summary>
         <div class="faq__a">
-          <p>The best first step is to come see us. <a href="#enroll" style="color:var(--blue);font-weight:700;">Schedule a tour</a> using the form below, or reach out at <a href="mailto:hello@pjecc.org" style="color:var(--blue);font-weight:700;">hello@pjecc.org</a>. We're now enrolling for the 2026–2027 school year at both campuses.</p>
+          <p>The best first step is to come see us. <a href="#enroll" style="color:var(--blue);font-weight:700;">Schedule a tour</a> using the form below, or reach out at <a href="mailto:chana@pjecc.org" style="color:var(--blue);font-weight:700;">chana@pjecc.org</a>. We're now enrolling for the 2026–2027 school year at both campuses.</p>
         </div>
       </details>
     </div>
@@ -317,7 +317,7 @@ $ver = function ( $file ) use ( $img_dir ) {
         <ul class="contact-list">
           <li>
             <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></span>
-            <span><strong>Email</strong><a href="mailto:hello@pjecc.org">hello@pjecc.org</a></span>
+            <span><strong>Email</strong><a href="mailto:chana@pjecc.org">chana@pjecc.org</a></span>
           </li>
           <li>
             <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
@@ -393,7 +393,7 @@ $ver = function ( $file ) use ( $img_dir ) {
         <div class="footer__social">
           <a href="https://www.instagram.com/pjecc/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#f9f4e7" stroke="none"/></svg></a>
           <a href="https://www.facebook.com/PJECC" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-3a4 4 0 0 0-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="mailto:hello@pjecc.org" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></a>
+          <a href="mailto:chana@pjecc.org" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></a>
         </div>
       </div>
       <div>
@@ -411,7 +411,7 @@ $ver = function ( $file ) use ( $img_dir ) {
         <ul>
           <li><a href="#visit">Palisades Campus</a></li>
           <li><a href="#visit">Westside Campus</a></li>
-          <li><a href="mailto:hello@pjecc.org">hello@pjecc.org</a></li>
+          <li><a href="mailto:chana@pjecc.org">chana@pjecc.org</a></li>
           <li><a href="tel:+13104547781">(310) 454-7781</a></li>
         </ul>
       </div>

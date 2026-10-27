@@ -80,7 +80,7 @@ Right now copy is edited in the template (Ace maintains it). If PJECC wants to e
 These are **placeholders** in `content.php` and should be swapped for real info:
 
 - [ ] **Photos** — the About block and campus banners use gradient placeholders. Drop in real classroom/campus photography (mark "Add a photo…" spots).
-- [ ] **Contact details** — `hello@pjecc.org`, `(310) 555-0100`, and campus addresses are placeholders.
+- [ ] **Contact details** — `chana@pjecc.org`, `(310) 555-0100`, and campus addresses are placeholders.
 - [ ] **Social links** — Instagram / Facebook links in the footer point to `#`.
 - [ ] **The tour form** — it's a front-end demo. On WordPress, connect it to a real form plugin (**WPForms**, **Contact Form 7**, or **Gravity Forms**) so submissions get emailed/stored. Replace the `<form id="tour-form">` block with the plugin's shortcode, or point it at your form handler.
 - [ ] **Testimonial** — currently the brand-summary quote, attributed to "A PJECC Parent." Swap for a real, named quote if you have permission.
