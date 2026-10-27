@@ -233,7 +233,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 <section class="section" id="faq">
   <div class="wrap">
     <div class="section__head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
-      <h2 class="section-title" style="color:var(--blue);">Frequently Asked<br>Questions.</h2>
+      <h2 class="section-title" style="color:var(--blue);font-family:var(--f-sub);font-style:italic;font-weight:600;text-transform:none;letter-spacing:0;line-height:1.05;font-size:clamp(34px,5.5vw,60px);">Frequently Asked<br>Questions.</h2>
     </div>
     <div class="faq reveal">
       <details class="faq__item" open>
