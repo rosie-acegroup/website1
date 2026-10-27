@@ -18,7 +18,7 @@ $ver = function ( $file ) use ( $img_dir ) {
 <header class="nav" id="site-nav">
   <div class="nav__inner">
     <a class="nav__logo" href="#top" aria-label="PJECC home">
-      <img src="<?php echo $asset; ?>/img/logo-stacked.png" alt="PJECC Palisades Jewish Early Childhood Center">
+      <img src="<?php echo $asset; ?>/img/logo-horizontal.png<?php echo $ver('logo-horizontal.png'); ?>" alt="PJECC Palisades Jewish Early Childhood Center">
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#about">About</a>
@@ -388,7 +388,7 @@ $ver = function ( $file ) use ( $img_dir ) {
   <div class="wrap">
     <div class="footer__grid">
       <div class="footer__logo">
-        <img src="<?php echo $asset; ?>/img/logo-primary.png" alt="PJECC Palisades Jewish Early Childhood Center">
+        <img src="<?php echo $asset; ?>/img/logo-horizontal.png<?php echo $ver('logo-horizontal.png'); ?>" alt="PJECC Palisades Jewish Early Childhood Center">
         <p>A Chabad-affiliated Jewish early childhood center serving infants through TK, open to families of all backgrounds. We're home. And so are you.</p>
         <div class="footer__social">
           <a href="https://www.instagram.com/pjecc/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#f9f4e7" stroke="none"/></svg></a>
