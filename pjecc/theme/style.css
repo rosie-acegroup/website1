@@ -169,7 +169,7 @@ h2.section-title{font-size:clamp(38px,6.5vw,74px);margin-bottom:0.5rem;}
 /* ============================================================
    GENERIC SECTION
    ============================================================ */
-.section{padding:clamp(4.5rem,10vw,8rem) 0;position:relative;}
+.section{padding:clamp(3.25rem,6.5vw,5.5rem) 0;position:relative;}
 .section--alt{background:var(--paper-2);}
 .section__head{max-width:720px;margin-bottom:3.2rem;}
 .section__head .eyebrow{margin-bottom:1rem;}
