@@ -331,7 +331,7 @@ $ver = function ( $file ) use ( $img_dir ) {
       </div>
       <div class="form-card reveal">
         <form id="tour-form" action="https://api.web3forms.com/submit" method="POST">
-          <?php $pjecc_form_key = defined( 'PJECC_FORM_KEY' ) ? PJECC_FORM_KEY : ''; ?>
+          <?php $pjecc_form_key = ( defined( 'PJECC_FORM_KEY' ) && PJECC_FORM_KEY ) ? PJECC_FORM_KEY : 'afa86c20-0c9c-47df-8db7-9be98be80366'; ?>
           <input type="hidden" name="access_key" value="<?php echo function_exists( 'esc_attr' ) ? esc_attr( $pjecc_form_key ) : htmlspecialchars( $pjecc_form_key ); ?>">
           <input type="hidden" name="subject" value="New Tour Request from the PJECC website">
           <input type="hidden" name="from_name" value="PJECC Website">
