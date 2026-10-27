@@ -144,7 +144,7 @@ h2.section-title{font-family:var(--f-sub);font-style:italic;font-weight:600;text
   font-weight:600;
   text-transform:none;
   font-size:clamp(30px,5.5vw,64px);
-  color:var(--green);
+  color:var(--blue);
   letter-spacing:0;
   line-height:1.06;
   margin:1.2rem 0 1.6rem;
