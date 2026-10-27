@@ -70,7 +70,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
     <div class="about__grid">
       <div class="about__copy reveal">
         <h2 class="section-title">Where Strong Beginnings<br>Take Root.</h2>
-        <p class="section-sub" style="margin:1rem 0 1.6rem;">The Palisades welcomes PJECC back, stronger than ever.</p>
+        <p class="section-sub" style="margin:1rem 0 1.6rem;">The Palisades welcomes PJECC back,<br>stronger than ever.</p>
         <p>Over 20 years ago, Chabad of the Pacific Palisades opened PJECC with a simple vision: a place where children could grow in an environment filled with warmth, curiosity, beauty, and genuine care. As our school grew, so did that vision, slowly shaping a campus and classrooms that feel alive with childhood.</p>
         <p>After the Palisades fires forced a temporary move to the Westside, what began as a crisis response grew into an expansion. Today we're entering a new chapter: reopening our Palisades campus while continuing to nurture our Westside community, serving both and welcoming new families.</p>
         <p>Through it all, our purpose has stayed the same: to create a place where every child is known, every family feels welcome, and childhood is celebrated in all the ways that matter most.</p>
@@ -414,7 +414,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
     </div>
     <div class="footer__bottom">
       <span>&copy; <?php echo function_exists('date') ? date('Y') : '2026'; ?> Palisades Jewish Early Childhood Center. All rights reserved.</span>
-      <span>Branding &amp; site by <a href="https://acegroupny.com">The Ace Group</a></span>
+      <span>Branding &amp; site by <a href="https://acegroupny.com" target="_blank" rel="noopener">The Ace Group</a></span>
     </div>
   </div>
 </footer>
