@@ -139,10 +139,11 @@ h2.section-title{font-size:clamp(38px,6.5vw,74px);margin-bottom:0.5rem;}
 .hero{position:relative;padding:clamp(9rem,16vh,12rem) 0 clamp(4rem,8vh,7rem);overflow:hidden;text-align:center;}
 .hero__inner{position:relative;z-index:3;max-width:860px;margin:0 auto;}
 .hero__title{
-  font-size:clamp(58px,12vw,150px);
+  font-size:clamp(40px,7.5vw,88px);
   color:var(--green);
   letter-spacing:0.005em;
   margin:1.4rem 0 1.6rem;
+  white-space:nowrap;
 }
 .hero__title em{font-family:var(--f-sub);font-style:italic;text-transform:none;color:var(--blue);display:inline-block;}
 .hero__lead{font-size:clamp(18px,2.2vw,22px);color:var(--ink-soft);max-width:600px;margin:0 auto 2.4rem;}
