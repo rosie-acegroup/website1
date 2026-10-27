@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * Tour-form email delivery via Web3Forms (reliable, no SMTP or plugin needed).
  *
  * Submissions are delivered to the address the Web3Forms access key below is
- * registered to (chana@pjecc.org). To change the destination, register a new
+ * registered to (info@pjecc.org). To change the destination, register a new
  * key at https://web3forms.com and replace the value below.
  * This is a public client-side key — safe to ship in the theme.
  */
@@ -86,7 +86,7 @@ add_filter( 'wp_resource_hints', 'pjecc_resource_hints', 10, 2 );
  * Change the recipient here (or override with the 'pjecc_tour_recipient' filter).
  */
 function pjecc_tour_recipient() {
-	return apply_filters( 'pjecc_tour_recipient', 'chana@pjecc.org' );
+	return apply_filters( 'pjecc_tour_recipient', 'info@pjecc.org' );
 }
 
 function pjecc_handle_tour() {

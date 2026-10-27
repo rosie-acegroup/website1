@@ -71,11 +71,11 @@
           .then(function (j) {
             if (btn) { btn.disabled = false; btn.textContent = label; }
             if (j && j.success) { if (note) note.hidden = false; form.reset(); }
-            else { window.alert('Sorry, something went wrong sending your request. Please email chana@pjecc.org.'); }
+            else { window.alert('Sorry, something went wrong sending your request. Please email info@pjecc.org.'); }
           })
           .catch(function () {
             if (btn) { btn.disabled = false; btn.textContent = label; }
-            window.alert('Sorry, something went wrong sending your request. Please email chana@pjecc.org.');
+            window.alert('Sorry, something went wrong sending your request. Please email info@pjecc.org.');
           });
         return;
       }
