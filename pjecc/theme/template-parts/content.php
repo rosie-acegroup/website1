@@ -233,8 +233,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 <section class="section" id="faq">
   <div class="wrap">
     <div class="section__head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
-      <p class="eyebrow">Good to Know</p>
-      <h2 class="section-title">Frequently Asked<br>Questions.</h2>
+      <h2 class="section-title" style="color:var(--blue);">Frequently Asked<br>Questions.</h2>
     </div>
     <div class="faq reveal">
       <details class="faq__item" open>
@@ -298,7 +297,6 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
   <div class="wrap">
     <div class="enroll__grid">
       <div class="reveal">
-        <p class="eyebrow">Come See Us</p>
         <h2 class="section-title">Schedule a Tour.</h2>
         <p class="lead" style="margin-bottom:2rem;">If you're considering enrolling for the 2026–2027 school year, now is the moment. Come see the space, meet our educators, and experience the community that makes PJECC so special.</p>
         <ul class="contact-list">
@@ -393,8 +391,8 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
         <img src="<?php echo $asset; ?>/img/logo-primary.png" alt="PJECC Palisades Jewish Early Childhood Center">
         <p>A Chabad-affiliated Jewish early childhood center serving infants through TK, open to families of all backgrounds. We're home. And so are you.</p>
         <div class="footer__social">
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#f9f4e7" stroke="none"/></svg></a>
-          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-3a4 4 0 0 0-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/pjecc/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#f9f4e7" stroke="none"/></svg></a>
+          <a href="https://www.facebook.com/PJECC" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-3a4 4 0 0 0-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
           <a href="mailto:hello@pjecc.org" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="#f9f4e7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></a>
         </div>
       </div>
