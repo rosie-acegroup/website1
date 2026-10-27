@@ -136,7 +136,7 @@ h2.section-title{font-family:var(--f-sub);font-style:italic;font-weight:600;text
 /* ============================================================
    HERO
    ============================================================ */
-.hero{position:relative;padding:clamp(9rem,16vh,12rem) 0 clamp(4rem,8vh,7rem);overflow:hidden;text-align:center;}
+.hero{position:relative;padding:clamp(9rem,16vh,12rem) clamp(1.5rem,5vw,2rem) clamp(4rem,8vh,7rem);overflow:hidden;text-align:center;}
 .hero__inner{position:relative;z-index:3;max-width:860px;margin:0 auto;}
 .hero__title{
   font-family:var(--f-sub);
@@ -359,6 +359,8 @@ h2.section-title{font-family:var(--f-sub);font-style:italic;font-weight:600;text
 }
 @media (max-width:600px){
   body{font-size:18px;}
+  .wrap{padding-left:1.8rem;padding-right:1.8rem;}
+  .hero{padding-left:1.8rem;padding-right:1.8rem;}
   .cards,.programs{grid-template-columns:1fr;}
   .stats{grid-template-columns:1fr;}
   .footer__grid{grid-template-columns:1fr;text-align:center;}

@@ -324,37 +324,37 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
         </ul>
       </div>
       <div class="form-card reveal">
-        <form id="tour-form" method="post" action="<?php echo function_exists( 'admin_url' ) ? esc_url( admin_url( 'admin-post.php' ) ) : '#'; ?>">
-          <input type="hidden" name="action" value="pjecc_tour">
-          <?php if ( function_exists( 'wp_nonce_field' ) ) { wp_nonce_field( 'pjecc_tour', 'pjecc_nonce' ); } ?>
-          <!-- Honeypot: hidden from people, bots fill it and get dropped -->
-          <div class="field pjecc-hp" aria-hidden="true">
-            <label for="website">Leave this field empty</label>
-            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        <form id="tour-form" action="https://api.web3forms.com/submit" method="POST">
+          <?php $pjecc_form_key = defined( 'PJECC_FORM_KEY' ) ? PJECC_FORM_KEY : ''; ?>
+          <input type="hidden" name="access_key" value="<?php echo function_exists( 'esc_attr' ) ? esc_attr( $pjecc_form_key ) : htmlspecialchars( $pjecc_form_key ); ?>">
+          <input type="hidden" name="subject" value="New Tour Request from the PJECC website">
+          <input type="hidden" name="from_name" value="PJECC Website">
+          <?php if ( function_exists( 'home_url' ) ) : ?><input type="hidden" name="redirect" value="<?php echo esc_url( home_url( '/?tour=sent#enroll' ) ); ?>"><?php endif; ?>
+          <!-- Spam honeypot (Web3Forms botcheck) -->
+          <input type="checkbox" name="botcheck" class="pjecc-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="field">
+            <label for="name">Parent / Guardian Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
           </div>
           <div class="field">
-            <label for="pname">Parent / Guardian Name</label>
-            <input id="pname" name="pname" type="text" autocomplete="name" required>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
           </div>
           <div class="field">
-            <label for="pemail">Email</label>
-            <input id="pemail" name="pemail" type="email" autocomplete="email" required>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
           </div>
           <div class="field">
-            <label for="pphone">Phone</label>
-            <input id="pphone" name="pphone" type="tel" autocomplete="tel">
-          </div>
-          <div class="field">
-            <label for="pcampus">Location of Interest</label>
-            <select id="pcampus" name="pcampus">
+            <label for="location">Location of Interest</label>
+            <select id="location" name="location">
               <option>Palisades</option>
               <option>Westside</option>
               <option>Either / Not sure</option>
             </select>
           </div>
           <div class="field">
-            <label for="pchild">Child's Age</label>
-            <select id="pchild" name="pchild">
+            <label for="child_age">Child's Age</label>
+            <select id="child_age" name="child_age">
               <option>Infant (0–1)</option>
               <option>Toddler (1–2)</option>
               <option>2 years</option>
@@ -363,8 +363,8 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
             </select>
           </div>
           <div class="field">
-            <label for="pmsg">Anything you'd like us to know?</label>
-            <textarea id="pmsg" name="pmsg" rows="3"></textarea>
+            <label for="message">Anything you'd like us to know?</label>
+            <textarea id="message" name="message" rows="3"></textarea>
           </div>
           <button class="btn" type="submit" style="width:100%;justify-content:center;">Request a Tour</button>
 <?php if ( ! empty( $_GET['tour'] ) && 'sent' === $_GET['tour'] ) : ?>

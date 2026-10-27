@@ -53,13 +53,37 @@
   if (form) {
     form.addEventListener('submit', function (ev) {
       var action = form.getAttribute('action') || '';
-      if (action === '' || action === '#') {
+      var keyEl = form.querySelector('input[name="access_key"]');
+      var key = keyEl ? (keyEl.value || '').trim() : '';
+      var note = form.querySelector('.form-note--js');
+
+      // With a Web3Forms access key: send for real via AJAX, stay on the page.
+      if (action.indexOf('web3forms.com') !== -1 && key) {
         ev.preventDefault();
-        var note = form.querySelector('.form-note--js');
-        if (note) note.hidden = false;
-        form.reset();
+        var btn = form.querySelector('button[type="submit"]');
+        var label = btn ? btn.textContent : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+        fetch(action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        }).then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (btn) { btn.disabled = false; btn.textContent = label; }
+            if (j && j.success) { if (note) note.hidden = false; form.reset(); }
+            else { window.alert('Sorry, something went wrong sending your request. Please email hello@pjecc.org.'); }
+          })
+          .catch(function () {
+            if (btn) { btn.disabled = false; btn.textContent = label; }
+            window.alert('Sorry, something went wrong sending your request. Please email hello@pjecc.org.');
+          });
+        return;
       }
-      /* otherwise: let WordPress handle the real submission */
+
+      // No key yet, or the static preview: show the thank-you without sending.
+      ev.preventDefault();
+      if (note) note.hidden = false;
+      form.reset();
     });
   }
 })();

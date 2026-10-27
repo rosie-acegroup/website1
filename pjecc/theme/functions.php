@@ -7,6 +7,19 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+/**
+ * Tour-form email delivery via Web3Forms (reliable, no SMTP or plugin needed).
+ *
+ * HOW TO TURN IT ON:
+ *   1. Go to https://web3forms.com and enter  hello@pjecc.org  as the destination.
+ *   2. They email you a free Access Key.
+ *   3. Paste that key between the quotes below, then save/re-upload the theme.
+ * Until a key is set, the form shows a thank-you but does not send.
+ */
+if ( ! defined( 'PJECC_FORM_KEY' ) ) {
+	define( 'PJECC_FORM_KEY', '' );
+}
+
 if ( ! function_exists( 'pjecc_setup' ) ) {
 	function pjecc_setup() {
 		add_theme_support( 'title-tag' );
