@@ -35,7 +35,7 @@ function pjecc_assets() {
 
 	wp_enqueue_style(
 		'pjecc-fonts',
-		'https://fonts.googleapis.com/css2?family=League+Gothic&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=PT+Sans+Narrow:wght@400;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=League+Gothic&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap',
 		array(),
 		null
 	);
