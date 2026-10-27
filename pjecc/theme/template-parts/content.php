@@ -302,11 +302,11 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
         <ul class="contact-list">
           <li>
             <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></span>
-            <span><strong>Email</strong><span>hello@pjecc.org</span></span>
+            <span><strong>Email</strong><a href="mailto:hello@pjecc.org">hello@pjecc.org</a></span>
           </li>
           <li>
             <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
-            <span><strong>Call</strong><span>(310) 454-7781</span></span>
+            <span><strong>Call</strong><a href="tel:+13104547781">(310) 454-7781</a></span>
           </li>
           <li>
             <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
