@@ -69,7 +69,6 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
   <div class="wrap">
     <div class="about__grid">
       <div class="about__copy reveal">
-        <p class="eyebrow">Our Story</p>
         <h2 class="section-title">Where Strong Beginnings<br>Take Root.</h2>
         <p class="section-sub" style="margin:1rem 0 1.6rem;">The Palisades welcomes PJECC back, stronger than ever.</p>
         <p>Over 20 years ago, Chabad of the Pacific Palisades opened PJECC with a simple vision: a place where children could grow in an environment filled with warmth, curiosity, beauty, and genuine care. As our school grew, so did that vision, slowly shaping a campus and classrooms that feel alive with childhood.</p>
@@ -88,8 +87,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 <section class="section section--alt" id="why">
   <div class="wrap">
     <div class="section__head reveal">
-      <p class="eyebrow xl">Why PJECC</p>
-      <h2 class="section-title">A Rare Kind of Joyful.</h2>
+      <h2 class="section-title">Why PJECC</h2>
       <p class="lead">Children aren't just cared for or just taught, they're genuinely guided to become thinkers, explorers, and confident individuals. Here's what makes childhood at PJECC different.</p>
     </div>
     <div class="cards">
@@ -131,9 +129,8 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 <section class="section" id="programs">
   <div class="wrap">
     <div class="section__head reveal">
-      <p class="eyebrow xl">Our Classes</p>
-      <h2 class="section-title">Where Your Child's<br>Story Begins.</h2>
-      <p class="lead">From first steps to their leap toward kindergarten, every class meets children exactly where they are, with warmth, wonder, and room to grow.</p>
+      <h2 class="section-title">Our Classes</h2>
+      <p class="lead">Where your child's story begins. From first steps to their leap toward kindergarten, every class meets children exactly where they are, with warmth, wonder, and room to grow.</p>
     </div>
     <div class="programs">
       <article class="program program--pink reveal">
@@ -192,7 +189,6 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 <section class="section" id="visit">
   <div class="wrap">
     <div class="section__head reveal">
-      <p class="eyebrow xl">Visit Us</p>
       <h2 class="section-title">Two Campuses.<br>One Community.</h2>
       <p class="lead">Rooted in the same values, warmth, and excellence our families have trusted for generations, now welcoming children across two coastal campuses.</p>
     </div>
@@ -233,7 +229,7 @@ if ( ! isset( $asset ) ) { $asset = 'assets'; }
 <section class="section" id="faq">
   <div class="wrap">
     <div class="section__head reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
-      <h2 class="section-title" style="color:var(--blue);font-family:var(--f-sub);font-style:italic;font-weight:600;text-transform:none;letter-spacing:0;line-height:1.05;font-size:clamp(34px,5.5vw,60px);">Frequently Asked<br>Questions.</h2>
+      <h2 class="section-title" style="color:var(--blue);">Frequently Asked<br>Questions.</h2>
     </div>
     <div class="faq reveal">
       <details class="faq__item" open>
