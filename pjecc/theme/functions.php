@@ -10,14 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Tour-form email delivery via Web3Forms (reliable, no SMTP or plugin needed).
  *
- * HOW TO TURN IT ON:
- *   1. Go to https://web3forms.com and enter  chana@pjecc.org  as the destination.
- *   2. They email you a free Access Key.
- *   3. Paste that key between the quotes below, then save/re-upload the theme.
- * Until a key is set, the form shows a thank-you but does not send.
+ * Submissions are delivered to the address the Web3Forms access key below is
+ * registered to (chana@pjecc.org). To change the destination, register a new
+ * key at https://web3forms.com and replace the value below.
+ * This is a public client-side key — safe to ship in the theme.
  */
 if ( ! defined( 'PJECC_FORM_KEY' ) ) {
-	define( 'PJECC_FORM_KEY', '' );
+	define( 'PJECC_FORM_KEY', 'afa86c20-0c9c-47df-8db7-9be98be80366' );
 }
 
 if ( ! function_exists( 'pjecc_setup' ) ) {
