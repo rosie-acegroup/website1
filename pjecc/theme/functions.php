@@ -30,8 +30,11 @@ add_action( 'after_setup_theme', 'pjecc_setup' );
  * matching the PJECC 2026 brand guidelines.
  */
 function pjecc_assets() {
-	$theme   = wp_get_theme();
-	$version = $theme->get( 'Version' ) ? $theme->get( 'Version' ) : '1.0.0';
+	// Version by file modification time so browsers/caches always pick up edits.
+	$css_path = get_stylesheet_directory() . '/style.css';
+	$js_path  = get_template_directory() . '/assets/js/pjecc.js';
+	$css_ver  = file_exists( $css_path ) ? filemtime( $css_path ) : '1.1.0';
+	$js_ver   = file_exists( $js_path ) ? filemtime( $js_path ) : '1.1.0';
 
 	wp_enqueue_style(
 		'pjecc-fonts',
@@ -41,13 +44,13 @@ function pjecc_assets() {
 	);
 
 	// Main stylesheet (style.css at the theme root).
-	wp_enqueue_style( 'pjecc-style', get_stylesheet_uri(), array( 'pjecc-fonts' ), $version );
+	wp_enqueue_style( 'pjecc-style', get_stylesheet_uri(), array( 'pjecc-fonts' ), $css_ver );
 
 	wp_enqueue_script(
 		'pjecc-script',
 		get_template_directory_uri() . '/assets/js/pjecc.js',
 		array(),
-		$version,
+		$js_ver,
 		true
 	);
 }
