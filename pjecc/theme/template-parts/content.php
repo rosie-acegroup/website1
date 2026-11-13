@@ -48,8 +48,8 @@ $ver = function ( $file ) use ( $img_dir ) {
 
   <div class="hero__inner">
     <img class="hero__tree" src="<?php echo $asset; ?>/img/tree-submark.png" alt="">
-    <h1 class="hero__title">We're Home.<br>And So <em>Are You.</em></h1>
-    <p class="hero__lead">A warm, nature-inspired Jewish early childhood community where every child is known, every family belongs, and childhood is celebrated in all the ways that matter most.</p>
+    <h1 class="hero__title">Two Campuses,<br>One <em>Community.</em></h1>
+    <p class="hero__lead">A warm, nature-inspired Jewish early childhood community where every child is known, every family belongs, and children are celebrated in all the ways that matter most.</p>
     <div class="hero__cta">
       <a class="btn" href="#enroll">Schedule a Tour</a>
       <a class="btn btn--ghost" href="#programs">Explore Programs</a>
@@ -63,9 +63,9 @@ $ver = function ( $file ) use ( $img_dir ) {
     <p class="strip__tag">A community that holds you.</p>
     <div class="stats">
       <div><span>20+</span><small>Years of joyful beginnings</small></div>
-      <div><span>2</span><small>Palisades &amp; Westside campuses</small></div>
-      <div><span>0–5</span><small>Infants through TK</small></div>
-      <div><span>Reggio</span><small>-inspired, outdoor learning</small></div>
+      <div><span>2</span><small>Palisades &amp; Franklin campuses</small></div>
+      <div><span class="stat--sm">3 Months–5 Years</span><small>Infants through TK</small></div>
+      <div><span class="stat--sm">Rooted in Nature</span><small>Centered on children</small></div>
     </div>
   </div>
 </section>
@@ -78,13 +78,20 @@ $ver = function ( $file ) use ( $img_dir ) {
         <h2 class="section-title">Where Strong Beginnings<br>Take Root.</h2>
         <p class="section-sub" style="margin:1rem 0 1.6rem;">The Palisades welcomes PJECC back,<br>stronger than ever.</p>
         <p>Over 20 years ago, Chabad of the Pacific Palisades opened PJECC with a simple vision: a place where children could grow in an environment filled with warmth, curiosity, beauty, and genuine care. As our school grew, so did that vision, slowly shaping a campus and classrooms that feel alive with childhood.</p>
-        <p>After the Palisades fires forced a temporary move to the Westside, what began as a crisis response grew into an expansion. Today we're entering a new chapter: reopening our Palisades campus while continuing to nurture our Westside community, serving both and welcoming new families.</p>
+        <p>After the Palisades fires forced a temporary move to our Franklin campus, what began as a crisis response grew into an expansion. Today we're entering a new chapter: reopening our Palisades campus while continuing to nurture our Franklin community, serving both and welcoming new families.</p>
         <p>Through it all, our purpose has stayed the same: to create a place where every child is known, every family feels welcome, and childhood is celebrated in all the ways that matter most.</p>
       </div>
       <div class="media media--tall reveal">
-        <img src="<?php echo $asset; ?>/img/about.jpg<?php echo $ver('about.jpg'); ?>" alt="Children playing together on the swing at PJECC">
+        <img src="<?php echo $asset; ?>/img/about.jpg<?php echo $ver('about.jpg'); ?>" alt="A child in a PJECC shirt playing on the tree">
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ==================== PHOTO BAND (before Why) ==================== -->
+<section class="photoband reveal">
+  <div class="wrap">
+    <img src="<?php echo $asset; ?>/img/why-banner.jpg<?php echo $ver('why-banner.jpg'); ?>" alt="A child playing at the water pump at PJECC">
   </div>
 </section>
 
@@ -99,7 +106,7 @@ $ver = function ( $file ) use ( $img_dir ) {
       <article class="card reveal">
         <div class="card__icon i-lime"><svg viewBox="0 0 24 24" fill="none" stroke="#20360f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>Reggio-Inspired</h3>
-        <p>Children are the driving force behind what they learn, engaging in collaborative, hands-on, joyful discovery that builds curiosity and resilience.</p>
+        <p>Children are the driving force behind what they learn, engaging in collaborative, joyful discovery that builds curiosity and resilience.</p>
       </article>
       <article class="card reveal">
         <div class="card__icon i-blue"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M12 8c-3-4-8-3-9 1 4 1 6 4 9 3z"/><path d="M12 8c3-4 8-3 9 1-4 1-6 4-9 3z"/></svg></div>
@@ -156,7 +163,7 @@ $ver = function ( $file ) use ( $img_dir ) {
       <article class="program program--yellow reveal">
         <p class="program__age">Chaverim Daled</p>
         <h3>3-Year-Olds</h3>
-        <p>Deeper discovery through hands-on investigations inspired by nature, literature, and Jewish traditions, encouraging collaboration, critical thinking, and the confidence to explore new ideas.</p>
+        <p>Deeper discovery through investigations inspired by nature, literature, and Jewish traditions, encouraging collaboration, critical thinking, and the confidence to explore new ideas.</p>
       </article>
       <article class="program program--green reveal">
         <p class="program__age">Chaverim Hey</p>
@@ -164,8 +171,7 @@ $ver = function ( $file ) use ( $img_dir ) {
         <p>Our oldest learners are confident, capable, and ready to lead. Alongside creative, purposeful play, they build a strong foundation in literacy, math, and problem-solving, ready for kindergarten and beyond.</p>
       </article>
       <a class="program program--blue reveal" href="#enroll" style="text-decoration:none;">
-        <p class="program__age">Find the right fit</p>
-        <h3>Not sure where<br>they belong?</h3>
+        <h3>Come See Us<br>in Action</h3>
         <p>Schedule a tour and we'll help you find your child's class, and let you feel the community for yourself. →</p>
       </a>
     </div>
@@ -177,7 +183,7 @@ $ver = function ( $file ) use ( $img_dir ) {
   <div class="wrap">
     <div class="philosophy__grid">
       <div class="media philosophy__photo reveal">
-        <img src="<?php echo $asset; ?>/img/philosophy.jpg<?php echo $ver('philosophy.jpg'); ?>" alt="Children creating together at PJECC">
+        <img src="<?php echo $asset; ?>/img/philosophy.jpg<?php echo $ver('philosophy.jpg'); ?>" alt="Children building with wooden blocks and crates at PJECC">
       </div>
       <div class="philosophy reveal">
         <p class="eyebrow">Our Philosophy</p>
@@ -194,11 +200,14 @@ $ver = function ( $file ) use ( $img_dir ) {
   <div class="wrap">
     <div class="section__head reveal">
       <h2 class="section-title">Two Campuses.<br>One Community.</h2>
-      <p class="lead">Rooted in the same values, warmth, and excellence our families have trusted for generations, now welcoming children across two coastal campuses.</p>
+      <p class="lead">Rooted in the same values, warmth, and excellence our families have trusted for generations, now welcoming children across two campuses.</p>
     </div>
     <div class="campuses">
       <article class="campus reveal">
-        <div class="campus__banner"><span class="campus__tag">Now Reopening</span></div>
+        <div class="campus__banner">
+          <img class="campus__img" src="<?php echo $asset; ?>/img/campus-palisades.jpg<?php echo $ver('campus-palisades.jpg'); ?>" alt="A child playing at the Palisades Campus">
+          <span class="campus__tag">Now Enrolling</span>
+        </div>
         <div class="campus__body">
           <h3>Palisades Campus</h3>
           <p>Our founding home in the Pacific Palisades, a natural, sun-filled campus of gardens, grass fields, and play, back and stronger than ever for the 2026–2027 school year.</p>
@@ -207,10 +216,13 @@ $ver = function ( $file ) use ( $img_dir ) {
         </div>
       </article>
       <article class="campus reveal">
-        <div class="campus__banner"><span class="campus__tag">Now Enrolling</span></div>
+        <div class="campus__banner">
+          <img class="campus__img" src="<?php echo $asset; ?>/img/campus-franklin.jpg<?php echo $ver('campus-franklin.jpg'); ?>" alt="Two children on the tire swing at the Franklin Campus">
+          <span class="campus__tag">Now Enrolling</span>
+        </div>
         <div class="campus__body">
-          <h3>Westside Campus</h3>
-          <p>The warm community that grew from our new chapter, now serving Westside families with the same nurturing, individualized approach PJECC is known for.</p>
+          <h3>Franklin Campus</h3>
+          <p>The warm community that grew from our new chapter, now serving Franklin families with the same nurturing, individualized approach PJECC is known for.</p>
           <p class="campus__addr"><a href="https://maps.google.com/?q=1537+Franklin+St,+Santa+Monica,+CA+90404" target="_blank" rel="noopener">1537 Franklin St, Santa Monica, CA 90404</a></p>
           <a class="link" href="#enroll">Schedule a tour →</a>
         </div>
@@ -237,6 +249,12 @@ $ver = function ( $file ) use ( $img_dir ) {
     </div>
     <div class="faq reveal">
       <details class="faq__item" open>
+        <summary>What's the heart of PJECC?</summary>
+        <div class="faq__a">
+          <p>Not at all. PJECC is open to families of all backgrounds. What unites our families is the desire to raise thoughtful, confident children who feel loved, respected, and connected. Jewish values are woven naturally into each day, nurturing kindness, respect, and belonging for every child.</p>
+        </div>
+      </details>
+      <details class="faq__item">
         <summary>What are your hours and schedule options?</summary>
         <div class="faq__a">
           <p>We offer flexible scheduling to fit your family:</p>
@@ -263,23 +281,17 @@ $ver = function ( $file ) use ( $img_dir ) {
       <details class="faq__item">
         <summary>Where are your two campuses?</summary>
         <div class="faq__a">
-          <p>We have two coastal locations:</p>
+          <p>We have two locations:</p>
           <ul>
             <li><strong>Palisades Campus</strong>: 17315 Sunset Blvd, Pacific Palisades, CA 90272</li>
-            <li><strong>Westside Campus</strong>: 1537 Franklin St, Santa Monica, CA 90404</li>
+            <li><strong>Franklin Campus</strong>: 1537 Franklin St, Santa Monica, CA 90404</li>
           </ul>
-        </div>
-      </details>
-      <details class="faq__item">
-        <summary>Do we have to be Jewish to attend?</summary>
-        <div class="faq__a">
-          <p>Not at all. PJECC is open to families of all backgrounds. What unites our families is the desire to raise thoughtful, confident children who feel loved, respected, and connected. Jewish values are woven naturally into each day, nurturing kindness, respect, and belonging for every child.</p>
         </div>
       </details>
       <details class="faq__item">
         <summary>What is your educational approach?</summary>
         <div class="faq__a">
-          <p>We're a Reggio-inspired, play-based program, one of the few outdoor Jewish preschools by the coast. Children learn through play, nature, art, and hands-on discovery in small classes with low student-to-teacher ratios, guided by specialists in early childhood development. We honor childhood rather than rush it.</p>
+          <p>We're a Reggio-inspired, play-based program, one of the few outdoor Jewish preschools by the coast. Children learn through play, nature, art, and discovery in small classes with low student-to-teacher ratios, guided by specialists in early childhood development. We honor childhood rather than rush it.</p>
         </div>
       </details>
       <details class="faq__item">
@@ -321,11 +333,11 @@ $ver = function ( $file ) use ( $img_dir ) {
           </li>
           <li>
             <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
-            <span><strong>Call</strong><a href="tel:+13104547781">(310) 454-7781</a></span>
+            <span><strong>Call</strong><a href="tel:+13103836584">(310) 383-6584</a></span>
           </li>
           <li>
             <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#255491" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-            <span><strong>Campuses</strong><span>Palisades: 17315 Sunset Blvd<br>Westside: 1537 Franklin St, Santa Monica</span></span>
+            <span><strong>Campuses</strong><span>Palisades: 17315 Sunset Blvd<br>Franklin: 1537 Franklin St, Santa Monica</span></span>
           </li>
         </ul>
       </div>
@@ -354,7 +366,7 @@ $ver = function ( $file ) use ( $img_dir ) {
             <label for="location">Location of Interest</label>
             <select id="location" name="location">
               <option>Palisades</option>
-              <option>Westside</option>
+              <option>Franklin</option>
               <option>Either / Not sure</option>
             </select>
           </div>
@@ -410,9 +422,9 @@ $ver = function ( $file ) use ( $img_dir ) {
         <h4>Visit</h4>
         <ul>
           <li><a href="#visit">Palisades Campus</a></li>
-          <li><a href="#visit">Westside Campus</a></li>
+          <li><a href="#visit">Franklin Campus</a></li>
           <li><a href="mailto:info@pjecc.org">info@pjecc.org</a></li>
-          <li><a href="tel:+13104547781">(310) 454-7781</a></li>
+          <li><a href="tel:+13103836584">(310) 383-6584</a></li>
         </ul>
       </div>
     </div>
