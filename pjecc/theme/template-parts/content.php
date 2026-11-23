@@ -350,44 +350,98 @@ $ver = function ( $file ) use ( $img_dir ) {
         <form id="tour-form" action="https://api.web3forms.com/submit" method="POST">
           <?php $pjecc_form_key = ( defined( 'PJECC_FORM_KEY' ) && PJECC_FORM_KEY ) ? PJECC_FORM_KEY : 'afa86c20-0c9c-47df-8db7-9be98be80366'; ?>
           <input type="hidden" name="access_key" value="<?php echo function_exists( 'esc_attr' ) ? esc_attr( $pjecc_form_key ) : htmlspecialchars( $pjecc_form_key ); ?>">
-          <input type="hidden" name="subject" value="New Tour Request from the PJECC website">
+          <input type="hidden" name="subject" value="New Preschool Inquiry from the PJECC website">
           <input type="hidden" name="from_name" value="PJECC Website">
           <?php if ( function_exists( 'home_url' ) ) : ?><input type="hidden" name="redirect" value="<?php echo esc_url( home_url( '/?tour=sent#enroll' ) ); ?>"><?php endif; ?>
           <!-- Spam honeypot (Web3Forms botcheck) -->
           <input type="checkbox" name="botcheck" class="pjecc-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="field">
-            <label for="name">Parent / Guardian Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
+          <div class="field-row">
+            <div class="field">
+              <label for="child_first">Child's First Name(s)</label>
+              <input id="child_first" name="Child's First Name(s)" type="text" required>
+            </div>
+            <div class="field">
+              <label for="child_last">Child's Last Name</label>
+              <input id="child_last" name="Child's Last Name" type="text" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="child_dob">Child's Date of Birth</label>
+              <input id="child_dob" name="Child's Date of Birth" type="date">
+            </div>
+            <div class="field">
+              <label for="gender">Gender</label>
+              <select id="gender" name="Gender">
+                <option value="">Select…</option>
+                <option>Boy</option>
+                <option>Girl</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="parent_first">Applying Parent's First Name</label>
+              <input id="parent_first" name="Applying Parent's First Name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="parent_last">Applying Parent's Last Name</label>
+              <input id="parent_last" name="Applying Parent's Last Name" type="text" autocomplete="family-name" required>
+            </div>
           </div>
           <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
+            <label for="parent2_first">Second Parent's First Name</label>
+            <input id="parent2_first" name="Second Parent's First Name" type="text">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Applying Parent's Email Address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="parent2_email">Second Parent's Email Address</label>
+              <input id="parent2_email" name="Second Parent's Email Address" type="email">
+            </div>
           </div>
           <div class="field">
-            <label for="phone">Phone</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel">
+            <label for="street">Street Address</label>
+            <input id="street" name="Street Address" type="text" autocomplete="street-address">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="citystatezip">City, State &amp; Zip Code</label>
+              <input id="citystatezip" name="City, State &amp; Zip Code" type="text">
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="Phone Number" type="tel" autocomplete="tel">
+            </div>
           </div>
           <div class="field">
-            <label for="location">Location of Interest</label>
-            <select id="location" name="location">
-              <option>Palisades</option>
-              <option>Franklin</option>
-              <option>Either / Not sure</option>
+            <label for="start_date">Desired Start Date</label>
+            <input id="start_date" name="Desired Start Date" type="text" placeholder="e.g. Fall 2026">
+          </div>
+          <div class="field">
+            <label for="hear">How did you hear about us?</label>
+            <input id="hear" name="How did you hear about us?" type="text">
+          </div>
+          <div class="field">
+            <label for="fire_impact">Have you been impacted by the Palisades Fire, lost your home, or been displaced? (Please specify.)</label>
+            <textarea id="fire_impact" name="Palisades Fire Impact" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <label for="contact_pref">Do you prefer to be contacted by email or phone?</label>
+            <select id="contact_pref" name="Preferred Contact Method">
+              <option value="">Select…</option>
+              <option>Email</option>
+              <option>Phone</option>
             </select>
           </div>
+          <p class="form-sub">Tour Scheduling</p>
           <div class="field">
-            <label for="child_age">Child's Age</label>
-            <select id="child_age" name="child_age">
-              <option>Infant (0–1)</option>
-              <option>Toddler (1–2)</option>
-              <option>2 years</option>
-              <option>3 years</option>
-              <option>4 years / TK</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="message">Anything you'd like us to know?</label>
-            <textarea id="message" name="message" rows="3"></textarea>
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="Comments" rows="3"></textarea>
           </div>
           <button class="btn" type="submit" style="width:100%;justify-content:center;">Request a Tour</button>
 <?php if ( ! empty( $_GET['tour'] ) && 'sent' === $_GET['tour'] ) : ?>
